@@ -1,0 +1,21 @@
+{
+  "name": "personal-blog",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.6",
+    "astro": "^5.14.9",
+    "gsap": "^3.13.0",
+    "tailwindcss": "^4.1.6",
+    "three": "^0.177.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.177.0"
+  }
+}

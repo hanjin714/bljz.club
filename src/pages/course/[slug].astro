@@ -1,0 +1,25 @@
+---
+import ContentLayout from "../../layouts/ContentLayout.astro";
+import KnowledgeArticle from "../../components/KnowledgeArticle.astro";
+import { courseLessons } from "../../lib/content";
+
+export function getStaticPaths() {
+  return courseLessons.map((lesson) => ({
+    params: { slug: lesson.slug },
+    props: { lesson },
+  }));
+}
+
+const { lesson } = Astro.props;
+---
+
+<ContentLayout
+  title={lesson.title}
+  eyebrow={`Day ${lesson.day} / 7 天小团队 AI 线索工厂`}
+  summary={lesson.summary}
+  externalUrl={lesson.externalUrl}
+  externalLabel="查看课堂延伸资料"
+  canonicalPath={`/course/${lesson.slug}`}
+>
+  <KnowledgeArticle sections={lesson.sections} map={lesson.map} assignment={lesson.assignment} />
+</ContentLayout>

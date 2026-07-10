@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <section class="relative flex min-h-screen items-center overflow-hidden px-5 pt-20 md:px-10">
+    <div class="mx-auto w-full max-w-[1240px]">
+      <p class="section-label">404 / Lost Node</p>
+      <h1 class="max-w-4xl font-display text-5xl font-black leading-tight md:text-8xl">这个节点还没有被记录。</h1>
+      <p class="mt-7 max-w-xl text-base leading-8 text-[var(--color-text-secondary)]">
+        可能是旧链接，也可能是页面已经换了位置。先回到内容地图，课程、文章和案例都还在那里。
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a class="route-link" href="/">返回首页</a>
+        <a class="route-link secondary" href="/articles/">查看文章</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .route-link {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(216, 150, 69, 0.46);
+    border-radius: 999px;
+    padding: 0 1.25rem;
+    color: var(--color-text);
+    background: rgba(216, 150, 69, 0.12);
+  }
+
+  .route-link.secondary {
+    border-color: var(--color-border-hover);
+    background: rgba(242, 232, 213, 0.04);
+  }
+</style>

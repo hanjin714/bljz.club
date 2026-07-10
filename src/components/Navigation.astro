@@ -1,0 +1,146 @@
+---
+import { siteConfig } from "../lib/config";
+import { serviceSiteUrl } from "../lib/content";
+---
+
+<header
+  id="nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+>
+  <div class="mx-auto max-w-[1200px] px-6 md:px-10 flex items-center justify-between h-16 md:h-20">
+    <!-- Logo -->
+    <a
+      href="/#hero"
+      class="font-display text-base font-bold tracking-tight text-white/90 transition-colors hover:text-white"
+    >
+      {siteConfig.name}<span class="text-[var(--color-accent)]"> / BLJZ</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-8">
+      {siteConfig.nav.map((item) => (
+        <a
+          href={item.href}
+          class="nav-link text-sm text-[var(--color-text-secondary)] hover:text-white transition-colors duration-300"
+          data-target={item.href}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Right -->
+    <div class="flex items-center gap-4">
+      <a
+        href={serviceSiteUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex min-h-11 items-center gap-2 text-sm text-[var(--color-text-secondary)] transition-colors hover:text-white"
+      >
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]"></span>
+        <span class="hidden md:inline">企业服务</span>
+        <span class="md:hidden">服务</span>
+      </a>
+      <!-- Mobile menu btn -->
+      <button
+        id="mobile-btn"
+        class="flex h-11 w-11 items-center justify-center md:hidden"
+        aria-label="打开菜单"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="menu-line block w-5 h-px bg-white/60 mb-1 transition-all"></span>
+        <span class="menu-line block w-5 h-px bg-white/60 transition-all"></span>
+        <span class="menu-line block w-3 h-px bg-white/60 mt-1 transition-all"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile overlay -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-40 flex items-center justify-center overflow-y-auto bg-[#050606] opacity-0 pointer-events-none transition-all duration-500"
+  aria-hidden="true"
+  inert
+>
+  <nav class="flex flex-col items-center gap-9" aria-label="移动端导航">
+    {siteConfig.nav.map((item) => (
+      <a
+        href={item.href}
+        class="text-2xl font-medium text-white/40 hover:text-white transition-colors tracking-wide"
+      >
+        {item.label}
+      </a>
+    ))}
+  </nav>
+</div>
+
+<script>
+  const nav = document.getElementById("nav")!;
+  const navLinks = document.querySelectorAll(".nav-link");
+  const sections = [...navLinks]
+    .map((l) => {
+      const target = (l as HTMLElement).dataset.target || "";
+      const hash = target.includes("#") ? `#${target.split("#").pop()}` : target;
+      return document.querySelector(hash);
+    })
+    .filter(Boolean);
+
+  function updateActive() {
+    const scrollY = window.scrollY + 120;
+    let current = "";
+    sections.forEach((s) => {
+      const el = s as HTMLElement;
+      if (el.offsetTop <= scrollY) current = `#${el.id}`;
+    });
+    navLinks.forEach((l) => {
+      const target = (l as HTMLElement).dataset.target || "";
+      const hash = target.includes("#") ? `#${target.split("#").pop()}` : target;
+      const isActive = hash === current;
+      l.classList.toggle("!text-white", isActive);
+    });
+  }
+
+  function updateNavStyle() {
+    const scrolled = window.scrollY > 20;
+    nav.classList.toggle("bg-[var(--color-bg)]/80", scrolled);
+    nav.classList.toggle("backdrop-blur-xl", scrolled);
+    nav.classList.toggle("border-b", scrolled);
+    nav.classList.toggle("border-[var(--color-border)]", scrolled);
+  }
+
+  window.addEventListener("scroll", () => { updateActive(); updateNavStyle(); }, { passive: true });
+
+  // Mobile menu
+  const mobileBtn = document.getElementById("mobile-btn")!;
+  const mobileMenu = document.getElementById("mobile-menu")!;
+  const spans = mobileBtn.querySelectorAll(".menu-line");
+  let open = false;
+
+  function setMenuOpen(nextOpen: boolean) {
+    open = nextOpen;
+    mobileMenu.classList.toggle("opacity-100", open);
+    mobileMenu.classList.toggle("pointer-events-auto", open);
+    mobileMenu.classList.toggle("opacity-0", !open);
+    mobileMenu.classList.toggle("pointer-events-none", !open);
+    mobileMenu.setAttribute("aria-hidden", String(!open));
+    mobileMenu.toggleAttribute("inert", !open);
+    mobileBtn.setAttribute("aria-expanded", String(open));
+    mobileBtn.setAttribute("aria-label", open ? "关闭菜单" : "打开菜单");
+    document.body.style.overflow = open ? "hidden" : "";
+    spans[0].classList.toggle("translate-y-[5px] rotate-45", open);
+    spans[1].classList.toggle("opacity-0", open);
+    spans[2].classList.toggle("-translate-y-[5px] -rotate-45", open);
+  }
+
+  mobileBtn.addEventListener("click", () => {
+    setMenuOpen(!open);
+  });
+
+  mobileMenu.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => {
+      setMenuOpen(false);
+    });
+  });
+</script>

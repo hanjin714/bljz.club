@@ -1,0 +1,42 @@
+---
+import { projects } from "../lib/config";
+---
+
+<section id="projects" class="section bg-[var(--color-bg-alt)]">
+  <div class="container-main">
+    <p class="section-label">Public Cases</p>
+
+    <h2 class="mb-6 max-w-3xl font-display text-3xl font-black leading-tight tracking-tight md:text-5xl">
+      项目不是履历，是判断落过地以后留下的证据。
+    </h2>
+    <p class="mb-16 max-w-2xl text-base leading-8 text-[var(--color-text-secondary)]">
+      这里既有小团队 AI 的业务方法，也有实体门店、内容网站和独立产品实验。点进去看问题、机制和第一步动作。
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-4">
+      {projects.map((project, i) => (
+        <a
+          href={project.link}
+          class="project-card group block rounded-[8px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-border-hover)] hover:bg-[var(--color-surface-hover)] md:p-8"
+        >
+          <span class="text-xs font-mono text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] transition-colors">
+            {(i + 1).toString().padStart(2, "0")}
+          </span>
+          <h3 class="mt-4 font-display text-2xl font-bold tracking-tight transition-colors group-hover:text-white">
+            {project.title}
+          </h3>
+          <p class="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+            {project.description}
+          </p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span class="rounded-[6px] border border-[var(--color-border)] bg-white/[0.03] px-2.5 py-1 text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

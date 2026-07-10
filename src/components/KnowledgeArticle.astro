@@ -1,0 +1,107 @@
+---
+import type { ContentSection } from "../lib/content";
+
+const {
+  sections,
+  map,
+  assignment,
+} = Astro.props as {
+  sections: Array<ContentSection | string>;
+  map?: string[];
+  assignment?: string;
+};
+---
+
+<section class="mt-16 grid gap-8 md:grid-cols-[0.62fr_0.38fr]">
+  <article class="space-y-6">
+    {sections.map((section, index) => {
+      const heading = typeof section === "string" ? `0${index + 1}` : section.heading;
+      const body = typeof section === "string" ? section : section.body;
+      const bullets = typeof section === "string" ? undefined : section.bullets;
+      const note = typeof section === "string" ? undefined : section.note;
+      return (
+        <div class="rounded-[8px] border border-[var(--color-border)] bg-[rgba(242,232,213,0.045)] p-6 backdrop-blur-md md:p-8">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">
+            {String(index + 1).padStart(2, "0")}
+          </p>
+          <h2 class="mt-4 font-display text-2xl font-bold leading-tight md:text-3xl">{heading}</h2>
+          <p class="mt-4 text-base leading-9 text-[var(--color-text-secondary)]">{body}</p>
+          {bullets && bullets.length > 0 && (
+            <ul class="knowledge-list mt-6 space-y-3 text-sm leading-7 text-[var(--color-text-secondary)]">
+              {bullets.map((item) => <li>{item}</li>)}
+            </ul>
+          )}
+          {note && (
+            <p class="mt-6 border-l-2 border-[var(--color-accent)] pl-4 text-sm leading-7 text-[var(--color-text-muted)]">
+              {note}
+            </p>
+          )}
+        </div>
+      );
+    })}
+  </article>
+
+  <aside class="space-y-6">
+    {map && (
+      <div class="rounded-[8px] border border-[var(--color-border)] bg-[rgba(5,6,6,0.72)] p-6 backdrop-blur-md">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">Mind Map</p>
+        <div class="mt-6 space-y-3">
+          {map.map((item, index) => (
+            <div class="mind-node">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{item}</strong>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {assignment && (
+      <div class="rounded-[8px] border border-[rgba(66,211,146,0.2)] bg-[rgba(66,211,146,0.06)] p-6 backdrop-blur-md">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-signal)]">Action</p>
+        <p class="mt-4 text-base leading-8 text-[var(--color-text)]">{assignment}</p>
+      </div>
+    )}
+  </aside>
+</section>
+
+<style>
+  .mind-node {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    align-items: center;
+    gap: 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: rgba(242, 232, 213, 0.035);
+    padding: 0.7rem 0.9rem;
+  }
+
+  .mind-node span {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--color-accent);
+  }
+
+  .mind-node strong {
+    font-size: 0.92rem;
+    color: var(--color-text);
+  }
+
+  .knowledge-list li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .knowledge-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--color-signal);
+    box-shadow: 0 0 14px rgba(66, 211, 146, 0.42);
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import { thoughts } from "../lib/config";
+---
+
+<section id="thoughts" class="section bg-[var(--color-bg)]">
+  <div class="container-main">
+    <p class="section-label">Judgement</p>
+
+    <h2 class="mb-16 max-w-3xl font-display text-3xl font-black leading-tight tracking-tight md:text-5xl">
+      工具可以很新，但判断要离钱更近。
+    </h2>
+
+    <div class="relative max-w-3xl">
+      <div class="absolute left-0 top-0 bottom-0 w-px bg-[var(--color-border)]"></div>
+
+      <div class="space-y-12">
+        {thoughts.map((item) => (
+          <div class="thought-item group relative pl-10">
+            <div class="absolute left-0 top-1.5 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[var(--color-bg)] border-2 border-[var(--color-border-hover)] group-hover:border-[var(--color-accent)] group-hover:bg-[var(--color-accent)] transition-all duration-300"></div>
+
+            <span class="text-xs font-mono text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] transition-colors tracking-wider">
+              {item.year}
+            </span>
+
+            <blockquote class="mt-2 font-display text-xl leading-relaxed text-[var(--color-text-secondary)] transition-colors duration-300 group-hover:text-white md:text-2xl">
+              {item.quote}
+            </blockquote>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

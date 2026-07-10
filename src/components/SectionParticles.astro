@@ -1,0 +1,151 @@
+---
+const { id } = Astro.props as { id: string };
+---
+
+<div class="absolute inset-0 z-0" id={`particles-${id}`}>
+  <canvas class="absolute inset-0 w-full h-full" id={`particles-canvas-${id}`}></canvas>
+</div>
+
+<script>
+  const containerId = `particles-${id}`;
+  const canvasId = `particles-canvas-${id}`;
+
+  class ParticleSystem {
+    canvas!: HTMLCanvasElement;
+    ctx!: CanvasRenderingContext2D;
+    particles: Particle[] = [];
+    mouse = { x: -9999, y: -9999 };
+    width = 0;
+    height = 0;
+    running = true;
+    observer!: IntersectionObserver;
+
+    constructor(containerId: string, canvasId: string) {
+      const container = document.getElementById(containerId);
+      const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
+      if (!container || !canvas) return;
+      this.canvas = canvas;
+      this.ctx = canvas.getContext("2d")!;
+      this.resize();
+      this.initParticles();
+      this.bindEvents();
+      this.setupObserver(container);
+      this.animate();
+    }
+
+    resize() {
+      this.width = this.canvas.parentElement!.offsetWidth;
+      this.height = this.canvas.parentElement!.offsetHeight;
+      this.canvas.width = this.width;
+      this.canvas.height = this.height;
+    }
+
+    initParticles() {
+      const count = Math.min(Math.floor((this.width * this.height) / 12000), 100);
+      this.particles = Array.from({ length: count }, () => new Particle(this.width, this.height));
+    }
+
+    bindEvents() {
+      window.addEventListener("resize", () => {
+        this.resize();
+        this.initParticles();
+      });
+      this.canvas.parentElement?.addEventListener("mousemove", (e) => {
+        const rect = this.canvas.getBoundingClientRect();
+        this.mouse.x = (e as MouseEvent).clientX - rect.left;
+        this.mouse.y = (e as MouseEvent).clientY - rect.top;
+      });
+      this.canvas.parentElement?.addEventListener("mouseleave", () => {
+        this.mouse.x = -9999;
+        this.mouse.y = -9999;
+      });
+    }
+
+    setupObserver(container: HTMLElement) {
+      this.observer = new IntersectionObserver(
+        ([entry]) => {
+          this.running = entry.isIntersecting;
+        },
+        { threshold: 0.1 }
+      );
+      this.observer.observe(container);
+    }
+
+    animate() {
+      if (this.running) {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+        this.particles.forEach((p) => {
+          p.update(this.mouse, this.width, this.height);
+          p.draw(this.ctx);
+        });
+        this.drawConnections();
+      }
+      requestAnimationFrame(() => this.animate());
+    }
+
+    drawConnections() {
+      for (let i = 0; i < this.particles.length; i++) {
+        for (let j = i + 1; j < this.particles.length; j++) {
+          const dx = this.particles[i].x - this.particles[j].x;
+          const dy = this.particles[i].y - this.particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+            this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+            this.ctx.strokeStyle = `rgba(255,255,255,${0.08 * (1 - dist / 120)})`;
+            this.ctx.lineWidth = 0.5;
+            this.ctx.stroke();
+          }
+        }
+      }
+    }
+  }
+
+  class Particle {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    r: number;
+
+    constructor(w: number, h: number) {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.r = Math.random() * 2 + 0.5;
+    }
+
+    update(mouse: { x: number; y: number }, w: number, h: number) {
+      // Repel from mouse
+      const dx = this.x - mouse.x;
+      const dy = this.y - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 150) {
+        const force = (1 - dist / 150) * 1.5;
+        this.vx += (dx / dist) * force * 0.1;
+        this.vy += (dy / dist) * force * 0.1;
+      }
+
+      this.vx *= 0.99;
+      this.vy *= 0.99;
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.x < 0) this.x = w;
+      if (this.x > w) this.x = 0;
+      if (this.y < 0) this.y = h;
+      if (this.y > h) this.y = 0;
+    }
+
+    draw(ctx: CanvasRenderingContext2D) {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255,255,255,0.3)";
+      ctx.fill();
+    }
+  }
+
+  new ParticleSystem(containerId, canvasId);
+</script>

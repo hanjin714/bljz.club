@@ -1,0 +1,17 @@
+---
+import CasePage from "../../components/CasePage.astro";
+import { legacyProjectSlugs, publicCases } from "../../lib/content";
+
+export function getStaticPaths() {
+  return publicCases
+    .filter((item) => legacyProjectSlugs.includes(item.slug))
+    .map((item) => ({
+      params: { slug: item.slug },
+      props: { item },
+    }));
+}
+
+const { item } = Astro.props;
+---
+
+<CasePage item={item} canonicalPath={`/cases/${item.slug}`} />

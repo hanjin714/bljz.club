@@ -1,0 +1,17 @@
+---
+import ArticlePage from "../../components/ArticlePage.astro";
+import { articleEntries, legacyArticleSlugs } from "../../lib/content";
+
+export function getStaticPaths() {
+  return articleEntries
+    .filter((article) => legacyArticleSlugs.includes(article.slug))
+    .map((article) => ({
+      params: { slug: article.slug },
+      props: { article },
+    }));
+}
+
+const { article } = Astro.props;
+---
+
+<ArticlePage article={article} canonicalPath={`/articles/${article.slug}`} />

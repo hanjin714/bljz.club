@@ -1,0 +1,107 @@
+---
+import "../styles/global.css";
+import Navigation from "../components/Navigation.astro";
+
+const {
+  title,
+  eyebrow,
+  summary,
+  externalUrl,
+  externalLabel = "查看延伸资料",
+  canonicalPath,
+  image,
+} = Astro.props as {
+  title: string;
+  eyebrow: string;
+  summary: string;
+  externalUrl?: string;
+  externalLabel?: string;
+  canonicalPath?: string;
+  image?: string;
+};
+
+const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(canonicalPath ?? Astro.url.pathname, siteOrigin);
+const socialImageUrl = new URL(image ?? "/assets/orbital-knowledge-atlas.png", siteOrigin);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={summary} />
+    <meta name="theme-color" content="#050606" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="悖论矩阵 / BLJZ.club" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={summary} />
+    <meta property="og:url" content={canonicalUrl.toString()} />
+    <meta property="og:image" content={socialImageUrl.toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={summary} />
+    <meta name="twitter:image" content={socialImageUrl.toString()} />
+    <title>{title} / 悖论矩阵</title>
+    <link rel="canonical" href={canonicalUrl.toString()} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Navigation />
+    <main class="content-page relative min-h-screen overflow-hidden pt-28">
+      <div class="container-main py-16 md:py-24">
+        <a href="/" class="inline-flex text-sm text-[var(--color-text-muted)] transition hover:text-[var(--color-accent)]">返回首页</a>
+        <p class="section-label mt-12">{eyebrow}</p>
+        <div class="grid gap-10 md:grid-cols-[0.76fr_0.24fr]">
+          <div>
+            <h1 class="break-words font-display text-4xl font-black leading-tight tracking-tight md:text-7xl">
+              {title}
+            </h1>
+            <p class="mt-7 max-w-2xl text-lg leading-9 text-[var(--color-text-secondary)]">
+              {summary}
+            </p>
+          </div>
+          <aside class="h-fit rounded-[8px] border border-[var(--color-border)] bg-[rgba(242,232,213,0.04)] p-5 backdrop-blur-md">
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)]">Reading Path</p>
+            <p class="mt-4 text-sm leading-7 text-[var(--color-text-secondary)]">
+              先看主判断，再沿着业务链路往下读。读完以后，回到自己的团队，找出一个今天就能被记录的动作。
+            </p>
+            <div class="mt-5 flex flex-col gap-3">
+              {externalUrl && (
+                <a class="quiet-button" href={externalUrl} target="_blank" rel="noopener noreferrer">{externalLabel}</a>
+              )}
+            </div>
+          </aside>
+        </div>
+        <slot />
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  .quiet-button {
+    display: inline-flex;
+    min-height: 38px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid rgba(216, 150, 69, 0.34);
+    color: var(--color-text);
+    background: rgba(216, 150, 69, 0.09);
+    font-size: 0.82rem;
+    transition: border-color 220ms ease, background 220ms ease, transform 220ms ease;
+  }
+
+  .quiet-button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(216, 150, 69, 0.7);
+    background: rgba(216, 150, 69, 0.14);
+  }
+</style>

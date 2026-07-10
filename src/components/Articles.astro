@@ -1,0 +1,62 @@
+---
+import { articleEntries } from "../lib/content";
+
+const articleTracks = [
+  {
+    label: "Current Judgements",
+    title: "现在正在形成的判断",
+    entries: articleEntries.slice(0, 4),
+  },
+  {
+    label: "Field Notes",
+    title: "从旧项目里留下来的实践",
+    entries: articleEntries.slice(4),
+  },
+];
+---
+
+<section id="articles" class="section bg-[var(--color-bg)]">
+  <div class="container-main">
+    <p class="section-label">Writings</p>
+
+    <h2 class="mb-16 max-w-2xl font-display text-3xl font-black leading-tight tracking-tight md:text-5xl">
+      公开文章不是资料堆放，是认知路径。
+    </h2>
+
+    <div class="space-y-14">
+      {articleTracks.map((track) => (
+        <div>
+          <div class="mb-4 flex items-end justify-between gap-4 border-b border-[var(--color-border)] px-4 pb-4 md:px-6">
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)]">{track.label}</p>
+              <h3 class="mt-2 font-display text-xl font-bold md:text-2xl">{track.title}</h3>
+            </div>
+            <span class="font-mono text-xs text-[var(--color-text-muted)]">{String(track.entries.length).padStart(2, "0")}</span>
+          </div>
+
+          <div class="space-y-1">
+            {track.entries.map((a) => (
+              <a
+                href={`/articles/${a.slug}`}
+                class="article-row group flex items-start gap-5 rounded-[8px] border border-transparent px-4 py-6 transition-all duration-300 hover:border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] md:gap-10 md:px-6"
+              >
+                <span class="shrink-0 pt-0.5 font-mono text-sm text-[var(--color-text-muted)] transition-colors group-hover:text-[var(--color-accent)]">
+                  {a.num}
+                </span>
+                <div class="min-w-0 flex-1">
+                  <p class="mb-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-muted)]">{a.series}</p>
+                  <h4 class="text-lg font-semibold tracking-tight transition-colors group-hover:text-white md:text-xl">
+                    {a.title}
+                  </h4>
+                  <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{a.excerpt}</p>
+                </div>
+                <span class="hidden shrink-0 pt-5 font-mono text-sm text-[var(--color-text-muted)] md:block">{a.date}</span>
+                <span class="hidden shrink-0 items-center pt-5 text-sm text-[var(--color-text-muted)] transition-all duration-300 group-hover:translate-x-1 group-hover:text-[var(--color-accent)] md:flex">打开</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+---
+import ContentLayout from "../layouts/ContentLayout.astro";
+import KnowledgeArticle from "./KnowledgeArticle.astro";
+import type { PublicCase } from "../lib/content";
+
+const {
+  item,
+  canonicalPath = `/cases/${item.slug}`,
+} = Astro.props as {
+  item: PublicCase;
+  canonicalPath?: string;
+};
+---
+
+<ContentLayout
+  title={item.title}
+  eyebrow="Project / Case Map"
+  summary={item.description}
+  externalUrl={item.externalUrl}
+  externalLabel={item.externalLabel}
+  canonicalPath={canonicalPath}
+>
+  <KnowledgeArticle sections={item.sections} map={item.map} />
+</ContentLayout>

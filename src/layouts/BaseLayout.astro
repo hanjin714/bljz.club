@@ -1,0 +1,41 @@
+---
+import "../styles/global.css";
+import Navigation from "../components/Navigation.astro";
+
+const description = "悖论矩阵 BLJZ.club — 记录小团队如何把内容、线索、跟进、复盘和工具选择整理成 AI 能接入的结构。";
+const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, siteOrigin);
+const socialImageUrl = new URL("/assets/orbital-knowledge-atlas.png", siteOrigin);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#050606" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="悖论矩阵 / BLJZ.club" />
+    <meta property="og:title" content="悖论矩阵 / BLJZ.club" />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl.toString()} />
+    <meta property="og:image" content={socialImageUrl.toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>悖论矩阵 / BLJZ.club</title>
+    <link rel="canonical" href={canonicalUrl.toString()} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Navigation />
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

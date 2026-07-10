@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #050606;
+  --color-bg-alt: #0b0d0c;
+  --color-surface: rgba(17, 21, 19, 0.78);
+  --color-surface-hover: rgba(28, 34, 31, 0.86);
+  --color-border: rgba(242, 232, 213, 0.09);
+  --color-border-hover: rgba(242, 232, 213, 0.2);
+  --color-text: #f2eadb;
+  --color-text-secondary: #a8a095;
+  --color-text-muted: #676159;
+  --color-accent: #d89645;
+  --color-accent-glow: rgba(216, 150, 69, 0.18);
+  --color-accent-secondary: #42d392;
+  --color-signal: #42d392;
+  --color-oxide: #9d3f2f;
+  --font-display: "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
+  --font-body: "Geist", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
+}
+
+@layer base {
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 18% 14%, rgba(216, 150, 69, 0.14), transparent 30rem),
+      radial-gradient(circle at 82% 18%, rgba(66, 211, 146, 0.09), transparent 28rem),
+      linear-gradient(180deg, #050606 0%, #0a0b0a 44%, #050606 100%);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(242, 232, 213, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(242, 232, 213, 0.02) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(circle at 50% 10%, black 0%, transparent 72%);
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    background-image: url("/assets/orbital-knowledge-atlas.png");
+    background-size: cover;
+    background-position: center top;
+    mix-blend-mode: screen;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: #333; }
+}
+
+@layer components {
+  .section {
+    @apply relative w-full overflow-hidden;
+  }
+
+  .container-main {
+    @apply relative z-10 mx-auto max-w-[1240px] px-5 md:px-10 py-24 md:py-36;
+  }
+
+  /* Section label — small uppercase with accent */
+  .section-label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Massive stat number */
+  .stat-number {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    line-height: 0.9;
+  }
+
+  /* Subtle divider */
+  .divider {
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-accent), transparent);
+    margin: 2rem 0;
+  }
+
+  .glass-line {
+    background: linear-gradient(90deg, transparent, rgba(242, 232, 213, 0.16), transparent);
+    height: 1px;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #f4d29a 0%, var(--color-accent) 52%, var(--color-signal) 120%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

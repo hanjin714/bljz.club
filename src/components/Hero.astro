@@ -1,0 +1,404 @@
+---
+import { siteConfig } from "../lib/config";
+---
+
+<section id="hero" class="relative h-[320vh] overflow-clip bg-[var(--color-bg)]">
+  <div class="sticky top-0 h-screen min-h-[720px] overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-55">
+      <img
+        src="/assets/orbital-knowledge-atlas.png"
+        alt=""
+        class="h-full w-full object-cover object-center opacity-70"
+        loading="eager"
+      />
+    </div>
+
+    <div class="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_58%_45%,rgba(216,150,69,0.2),transparent_34rem),linear-gradient(90deg,rgba(5,6,6,0.92),rgba(5,6,6,0.45)_45%,rgba(5,6,6,0.82))]"></div>
+
+    <div class="absolute inset-0 z-[2]" id="atlas-3d-stage">
+      <canvas id="atlas-3d-canvas" class="h-full w-full"></canvas>
+    </div>
+
+    <div class="pointer-events-none absolute left-5 right-5 top-24 z-10 mx-auto max-w-[1240px] md:left-10 md:right-10">
+      <div class="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+        <span>BLJZ.club / Public System</span>
+        <span class="hidden md:inline">Scroll-driven atlas</span>
+      </div>
+    </div>
+
+    <div class="relative z-10 mx-auto grid h-full max-w-[1240px] grid-cols-1 items-center px-5 pt-24 md:grid-cols-[0.92fr_1.08fr] md:px-10">
+      <div class="max-w-[680px]">
+        <p class="hero-kicker text-xs uppercase tracking-[0.28em] text-[var(--color-accent)]">
+          {siteConfig.heroDeck}
+        </p>
+        <h1 class="hero-title mt-6 font-display text-[clamp(3.7rem,9vw,9.6rem)] font-black leading-[0.86] text-[var(--color-text)]">
+          {siteConfig.name}
+        </h1>
+        <p class="hero-subtitle mt-7 max-w-[560px] text-lg leading-8 text-[var(--color-text-secondary)] md:text-xl">
+          AI 是放大器，不是印钞机。这里记录课程、文章、案例和工具判断，把小团队的业务动作先整理成 AI 能接入的结构。
+        </p>
+
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a class="hero-action" href="#course">进入 7 天公开课</a>
+          <a class="hero-action ghost" href="#articles">阅读公开文章</a>
+        </div>
+      </div>
+
+      <div class="hero-panel mt-10 w-full justify-self-end md:mt-0 md:max-w-[460px]">
+        <p class="text-[11px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">Current Layer</p>
+        <div class="mt-5 space-y-4" id="hero-phases">
+          <div class="phase is-active" data-phase="0">
+            <span>01</span>
+            <strong>内容不是终点</strong>
+            <p>先让对的人看见，再给他开口的理由。</p>
+          </div>
+          <div class="phase" data-phase="1">
+            <span>02</span>
+            <strong>线索不能睡着</strong>
+            <p>评论、咨询、资料领取，都要回到基础表。</p>
+          </div>
+          <div class="phase" data-phase="2">
+            <span>03</span>
+            <strong>工具要有边界</strong>
+            <p>临时判断用 Agent，固定重复用 workflow。</p>
+          </div>
+          <div class="phase" data-phase="3">
+            <span>04</span>
+            <strong>系统从复盘长出来</strong>
+            <p>需要做成工具或长期系统，再让 Codex 介入。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[var(--color-text-muted)]">
+      <span>Scroll to unfold</span>
+      <div class="h-10 w-px overflow-hidden bg-white/10">
+        <div id="scroll-thread" class="h-1/3 w-full bg-[var(--color-accent)]"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-title {
+    text-shadow: 0 0 90px rgba(216, 150, 69, 0.22);
+  }
+
+  .hero-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    border-radius: 999px;
+    border: 1px solid rgba(216, 150, 69, 0.42);
+    background: rgba(216, 150, 69, 0.12);
+    color: var(--color-text);
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+    transition: transform 260ms ease, border-color 260ms ease, background 260ms ease;
+  }
+
+  .hero-action:hover {
+    transform: translateY(-2px);
+    border-color: rgba(216, 150, 69, 0.72);
+    background: rgba(216, 150, 69, 0.18);
+  }
+
+  .hero-action.ghost {
+    border-color: rgba(242, 232, 213, 0.16);
+    background: rgba(242, 232, 213, 0.04);
+    color: var(--color-text-secondary);
+  }
+
+  .hero-panel {
+    border-left: 1px solid rgba(242, 232, 213, 0.14);
+    padding-left: 1.5rem;
+  }
+
+  .phase {
+    position: relative;
+    padding: 1rem 0 1rem 1rem;
+    color: var(--color-text-muted);
+    opacity: 0.46;
+    transition: opacity 300ms ease, color 300ms ease, transform 300ms ease;
+  }
+
+  .phase::before {
+    content: "";
+    position: absolute;
+    left: -1.53rem;
+    top: 1.25rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(242, 232, 213, 0.2);
+    box-shadow: 0 0 0 0 rgba(66, 211, 146, 0);
+    transition: background 300ms ease, box-shadow 300ms ease;
+  }
+
+  .phase span {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-accent);
+  }
+
+  .phase strong {
+    display: block;
+    margin-top: 0.2rem;
+    color: inherit;
+    font-size: 1.05rem;
+  }
+
+  .phase p {
+    margin-top: 0.35rem;
+    font-size: 0.86rem;
+    line-height: 1.75;
+  }
+
+  .phase.is-active {
+    color: var(--color-text);
+    opacity: 1;
+    transform: translateX(6px);
+  }
+
+  .phase.is-active::before {
+    background: var(--color-signal);
+    box-shadow: 0 0 28px rgba(66, 211, 146, 0.7);
+  }
+
+  @media (max-width: 767px) {
+    #hero {
+      height: 260vh;
+    }
+
+    #hero .sticky {
+      min-height: 760px;
+    }
+
+    .hero-panel {
+      max-width: none;
+      border-left: 0;
+      border-top: 1px solid rgba(242, 232, 213, 0.12);
+      padding-left: 0;
+      padding-top: 1rem;
+    }
+
+    .phase {
+      padding-top: 0.65rem;
+      padding-bottom: 0.65rem;
+    }
+
+    .phase::before {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const phaseEls = Array.from(document.querySelectorAll<HTMLElement>(".phase"));
+  const scrollThread = document.getElementById("scroll-thread");
+
+  gsap.fromTo(
+    ".hero-kicker, .hero-title, .hero-subtitle, .hero-action, .hero-panel",
+    { y: 34, opacity: 0 },
+    { y: 0, opacity: 1, duration: 1.1, stagger: 0.08, ease: "power3.out" }
+  );
+
+  ScrollTrigger.create({
+    trigger: "#hero",
+    start: "top top",
+    end: "bottom bottom",
+    scrub: true,
+    onUpdate: (self) => {
+      const phase = Math.min(3, Math.floor(self.progress * 4));
+      phaseEls.forEach((el, index) => el.classList.toggle("is-active", index === phase));
+      if (scrollThread) {
+        scrollThread.style.transform = `translateY(${self.progress * 70}px)`;
+      }
+      window.dispatchEvent(new CustomEvent("atlas-progress", { detail: self.progress }));
+    },
+  });
+
+  async function initAtlas() {
+    const THREE = await import("three");
+    const canvas = document.getElementById("atlas-3d-canvas") as HTMLCanvasElement | null;
+    const stage = document.getElementById("atlas-3d-stage");
+    if (!canvas || !stage) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    camera.position.set(0, 0.25, 7.2);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.25 : 1.6));
+
+    const group = new THREE.Group();
+    group.position.x = 1.9;
+    scene.add(group);
+
+    const copper = new THREE.Color(0xd89645);
+    const signal = new THREE.Color(0x42d392);
+    const ivory = new THREE.Color(0xf2eadb);
+
+    const ringMaterial = new THREE.MeshBasicMaterial({
+      color: copper,
+      transparent: true,
+      opacity: 0.28,
+    });
+    const paleMaterial = new THREE.MeshBasicMaterial({
+      color: ivory,
+      transparent: true,
+      opacity: 0.1,
+    });
+    const signalMaterial = new THREE.MeshBasicMaterial({
+      color: signal,
+      transparent: true,
+      opacity: 0.88,
+    });
+
+    const rings: THREE.Mesh[] = [];
+    [1.08, 1.62, 2.18, 2.72].forEach((radius, index) => {
+      const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(radius, index === 0 ? 0.012 : 0.007, 24, 220),
+        index === 2 ? paleMaterial.clone() : ringMaterial.clone()
+      );
+      ring.rotation.x = Math.PI * (0.38 + index * 0.045);
+      ring.rotation.y = Math.PI * (0.12 - index * 0.07);
+      ring.rotation.z = index * 0.36;
+      ring.userData.baseRotation = ring.rotation.clone();
+      rings.push(ring);
+      group.add(ring);
+    });
+
+    const nodes: THREE.Mesh[] = [];
+    const nodeGeo = new THREE.SphereGeometry(0.035, 20, 20);
+    const nodeCount = window.innerWidth < 768 ? 22 : 34;
+    for (let i = 0; i < nodeCount; i++) {
+      const theta = i * 0.74;
+      const radius = 1.08 + (i % 4) * 0.54;
+      const node = new THREE.Mesh(nodeGeo, i % 5 === 0 ? signalMaterial.clone() : ringMaterial.clone());
+      node.position.set(Math.cos(theta) * radius, Math.sin(theta) * radius * 0.36, Math.sin(theta * 0.7) * 0.58);
+      node.userData.seed = theta;
+      node.userData.radius = radius;
+      nodes.push(node);
+      group.add(node);
+    }
+
+    const curveMaterial = new THREE.LineBasicMaterial({
+      color: 0xf2eadb,
+      transparent: true,
+      opacity: 0.09,
+    });
+    const lines: THREE.Line[] = [];
+    for (let i = 0; i < nodes.length - 1; i += 2) {
+      const geometry = new THREE.BufferGeometry().setFromPoints([nodes[i].position.clone(), nodes[i + 1].position.clone()]);
+      const line = new THREE.Line(geometry, curveMaterial.clone());
+      lines.push(line);
+      group.add(line);
+    }
+
+    const core = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(0.34, 1),
+      new THREE.MeshBasicMaterial({ color: 0xf0c27a, wireframe: true, transparent: true, opacity: 0.46 })
+    );
+    group.add(core);
+
+    let targetProgress = 0;
+    let progress = 0;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let stageIsVisible = true;
+    let animationFrame = 0;
+    window.addEventListener("atlas-progress", (event) => {
+      targetProgress = (event as CustomEvent<number>).detail;
+    });
+
+    function resize() {
+      const rect = stage.getBoundingClientRect();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, rect.width < 768 ? 1.25 : 1.6));
+      renderer.setSize(rect.width, rect.height);
+      camera.aspect = rect.width / rect.height;
+      camera.updateProjectionMatrix();
+      group.position.x = rect.width < 768 ? 0.62 : 1.92;
+      group.scale.setScalar(rect.width < 768 ? 0.66 : 0.92);
+      if (reduceMotion) renderer.render(scene, camera);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    function drawFrame() {
+      progress += (targetProgress - progress) * 0.08;
+      const t = performance.now() * 0.001;
+
+      group.rotation.y = -0.42 + progress * 1.1 + Math.sin(t * 0.2) * 0.08;
+      group.rotation.x = 0.08 + progress * 0.4;
+      group.rotation.z = -progress * 0.18;
+
+      rings.forEach((ring, index) => {
+        ring.rotation.z = ring.userData.baseRotation.z + t * (0.05 + index * 0.012) + progress * (index + 1) * 0.54;
+        ring.scale.setScalar(1 + progress * (0.06 + index * 0.035));
+        (ring.material as THREE.MeshBasicMaterial).opacity = 0.18 + Math.sin(progress * Math.PI) * 0.2;
+      });
+
+      nodes.forEach((node, index) => {
+        const spread = 1 + progress * 0.58;
+        const theta = node.userData.seed + progress * (1.2 + (index % 3) * 0.15);
+        const radius = node.userData.radius * spread;
+        node.position.x = Math.cos(theta) * radius;
+        node.position.y = Math.sin(theta) * radius * (0.36 + progress * 0.18);
+        node.position.z = Math.sin(theta * 0.7 + progress * 2.1) * (0.58 + progress * 0.8);
+        node.scale.setScalar(1 + Math.sin(t * 2 + index) * 0.18 + progress * 0.45);
+      });
+
+      lines.forEach((line, index) => {
+        const a = nodes[index * 2];
+        const b = nodes[index * 2 + 1];
+        if (!a || !b) return;
+        const attr = line.geometry.getAttribute("position") as THREE.BufferAttribute;
+        attr.setXYZ(0, a.position.x, a.position.y, a.position.z);
+        attr.setXYZ(1, b.position.x, b.position.y, b.position.z);
+        attr.needsUpdate = true;
+        (line.material as THREE.LineBasicMaterial).opacity = 0.05 + progress * 0.16;
+      });
+
+      core.rotation.x += 0.003;
+      core.rotation.y -= 0.004;
+      core.scale.setScalar(1 + progress * 0.45);
+
+      renderer.render(scene, camera);
+    }
+
+    function animate() {
+      animationFrame = 0;
+      if (!stageIsVisible || document.hidden || reduceMotion) return;
+      drawFrame();
+      animationFrame = requestAnimationFrame(animate);
+    }
+
+    function startAnimation() {
+      if (reduceMotion) {
+        drawFrame();
+        return;
+      }
+      if (!animationFrame && stageIsVisible && !document.hidden) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    }
+
+    const stageObserver = new IntersectionObserver(([entry]) => {
+      stageIsVisible = entry.isIntersecting;
+      if (stageIsVisible) startAnimation();
+    }, { rootMargin: "120px 0px" });
+    stageObserver.observe(stage);
+
+    document.addEventListener("visibilitychange", startAnimation);
+    startAnimation();
+  }
+
+  initAtlas();
+</script>

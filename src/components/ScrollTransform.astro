@@ -1,0 +1,336 @@
+---
+import { courseDays } from "../lib/config";
+---
+
+<section id="course" class="course-wheel-section section relative h-[440vh] bg-[var(--color-bg-alt)]">
+  <div class="sticky top-0 h-screen min-h-[720px] overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_28%_48%,rgba(216,150,69,0.13),transparent_26rem),radial-gradient(circle_at_72%_44%,rgba(66,211,146,0.08),transparent_26rem),linear-gradient(90deg,rgba(5,6,6,0.96),rgba(5,6,6,0.72)_55%,rgba(5,6,6,0.96))]"></div>
+
+    <div class="relative z-10 mx-auto grid h-full max-w-[1240px] grid-cols-1 items-center gap-10 px-5 pt-20 md:grid-cols-[0.46fr_0.54fr] md:px-10">
+      <div class="course-copy">
+        <p class="section-label">Public Course</p>
+        <h2 class="font-display text-4xl font-black leading-tight tracking-tight md:text-6xl">
+          7 天公开课，按一个业务轮盘逐日推进。
+        </h2>
+        <p class="mt-6 max-w-md text-base leading-8 text-[var(--color-text-secondary)]">
+          每滑动一段，只聚焦一天。左侧主位是当前课程，其他节点退到轮盘边缘，用户不用猜自己现在看到哪一讲。
+        </p>
+
+        <div class="active-lesson mt-10">
+          <div class="flex items-center justify-between gap-4">
+            <p class="font-mono text-xs uppercase tracking-[0.22em] text-[var(--color-accent)]" id="course-active-day">Day 01</p>
+            <span class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Current Focus</span>
+          </div>
+          <h3 class="mt-5 font-display text-3xl font-bold leading-tight md:text-4xl" id="course-active-title">
+            {courseDays[0].title}
+          </h3>
+          <p class="mt-4 text-base leading-8 text-[var(--color-text-secondary)]" id="course-active-axis">
+            {courseDays[0].axis}
+          </p>
+          <a id="course-active-link" href="/course/day-01" class="mt-7 inline-flex min-h-10 items-center rounded-full border border-[rgba(216,150,69,0.38)] px-5 text-sm text-[var(--color-text)] transition hover:border-[rgba(216,150,69,0.72)] hover:bg-[rgba(216,150,69,0.12)]">
+            查看当天内容
+          </a>
+        </div>
+      </div>
+
+      <div class="course-wheel-wrap" aria-label="7 天课程轮盘">
+        <div class="wheel-arc"></div>
+        <div class="wheel-arc inner"></div>
+        <div class="focus-marker">
+          <span></span>
+          <strong>主位</strong>
+        </div>
+
+        {courseDays.map((item) => (
+          <a
+            href={`/course/day-${item.day}`}
+            class="course-node"
+            data-day={item.day}
+            data-title={item.title}
+            data-axis={item.axis}
+          >
+            <span>{item.day}</span>
+            <strong>{item.title}</strong>
+            <em>{item.axis}</em>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="course-scroll-cue absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3 font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+      <span>Scroll the sequence</span>
+      <span class="progress-rail"><i id="course-progress-thumb"></i></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .course-wheel-section {
+    overflow: visible;
+  }
+
+  .course-copy,
+  .course-wheel-wrap {
+    will-change: transform;
+  }
+
+  .active-lesson {
+    max-width: 560px;
+    border: 1px solid rgba(242, 232, 213, 0.12);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(242, 232, 213, 0.07), rgba(5, 6, 6, 0.64));
+    padding: 1.5rem;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  }
+
+  .course-wheel-wrap {
+    position: relative;
+    min-height: 620px;
+    transform: translateX(clamp(200px, 12vw, 240px));
+  }
+
+  .wheel-arc {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(70vw, 680px);
+    height: min(70vw, 680px);
+    border: 1px solid rgba(216, 150, 69, 0.22);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 90px rgba(216, 150, 69, 0.05), 0 0 70px rgba(216, 150, 69, 0.06);
+  }
+
+  .wheel-arc::before {
+    content: "";
+    position: absolute;
+    inset: 14%;
+    border-radius: 50%;
+    border: 1px dashed rgba(242, 232, 213, 0.08);
+  }
+
+  .wheel-arc.inner {
+    left: 50%;
+    width: min(48vw, 470px);
+    height: min(48vw, 470px);
+    opacity: 0.55;
+  }
+
+  .focus-marker {
+    position: absolute;
+    left: calc(50% - min(35vw, 340px));
+    top: 50%;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    transform: translate(-50%, -50%);
+    color: var(--color-accent);
+  }
+
+  .focus-marker span {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--color-signal);
+    box-shadow: 0 0 30px rgba(66, 211, 146, 0.7);
+  }
+
+  .focus-marker strong {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .course-node {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 5;
+    display: grid;
+    width: 230px;
+    min-height: 112px;
+    gap: 0.35rem;
+    border: 1px solid rgba(242, 232, 213, 0.1);
+    border-radius: 8px;
+    background: rgba(9, 11, 10, 0.78);
+    padding: 1rem;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 18px 70px rgba(0, 0, 0, 0.32);
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    will-change: transform, opacity, filter;
+  }
+
+  .course-node span {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    color: var(--color-accent);
+  }
+
+  .course-node strong {
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    line-height: 1.25;
+    color: var(--color-text);
+  }
+
+  .course-node em {
+    font-style: normal;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  .course-node.is-active {
+    border-color: rgba(66, 211, 146, 0.58);
+    background: linear-gradient(135deg, rgba(66, 211, 146, 0.16), rgba(216, 150, 69, 0.13), rgba(5, 6, 6, 0.88));
+    box-shadow: 0 0 70px rgba(66, 211, 146, 0.14), 0 28px 90px rgba(0, 0, 0, 0.42);
+  }
+
+  .progress-rail {
+    position: relative;
+    display: block;
+    width: 86px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(216, 150, 69, 0.22);
+  }
+
+  .progress-rail i {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-accent);
+    transform: translateY(-50%);
+    box-shadow: 0 0 18px rgba(216, 150, 69, 0.75);
+  }
+
+  @media (max-width: 767px) {
+    .course-wheel-section {
+      height: 390vh;
+    }
+
+    .course-wheel-wrap {
+      min-height: 360px;
+      transform: translateX(0);
+    }
+
+    .wheel-arc {
+      left: 78%;
+      top: 30%;
+      width: 330px;
+      height: 330px;
+    }
+
+    .wheel-arc.inner {
+      left: 78%;
+      top: 30%;
+      width: 250px;
+      height: 250px;
+    }
+
+    .focus-marker {
+      display: none;
+    }
+
+    .course-node {
+      left: 78%;
+      top: 30%;
+      width: 190px;
+      min-height: 92px;
+      padding: 0.85rem;
+    }
+
+    .course-node strong {
+      font-size: 0.95rem;
+    }
+
+    .course-node em {
+      display: none;
+    }
+
+    .active-lesson {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+    }
+
+    .course-scroll-cue {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const section = document.querySelector<HTMLElement>("#course");
+  const nodes = Array.from(document.querySelectorAll<HTMLElement>(".course-node"));
+  const activeDay = document.getElementById("course-active-day");
+  const activeTitle = document.getElementById("course-active-title");
+  const activeAxis = document.getElementById("course-active-axis");
+  const activeLink = document.getElementById("course-active-link") as HTMLAnchorElement | null;
+  const thumb = document.getElementById("course-progress-thumb");
+
+  function renderWheel(progress: number) {
+    if (!nodes.length) return;
+    const max = nodes.length - 1;
+    const exact = progress * max;
+    const activeIndex = Math.min(max, Math.max(0, Math.round(exact)));
+    const width = window.innerWidth;
+    const radius = width < 768 ? 160 : 320;
+
+    nodes.forEach((node, index) => {
+      const offset = index - exact;
+      const angle = Math.PI + offset * 0.36;
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+      const distance = Math.abs(offset);
+      const isActive = index === activeIndex;
+      const scale = isActive ? 1.16 : Math.max(0.72, 1 - distance * 0.09);
+      const opacity = isActive ? 1 : Math.max(0.18, 0.72 - distance * 0.13);
+      const blur = isActive ? 0 : Math.min(4, distance * 0.85);
+
+      node.classList.toggle("is-active", isActive);
+      node.style.zIndex = String(isActive ? 60 : 30 - Math.round(distance));
+      node.style.opacity = String(opacity);
+      node.style.filter = `blur(${blur}px)`;
+      node.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${scale})`;
+    });
+
+    const current = nodes[activeIndex];
+    if (current) {
+      if (activeDay) activeDay.textContent = `Day ${current.dataset.day}`;
+      if (activeTitle) activeTitle.textContent = current.dataset.title || "";
+      if (activeAxis) activeAxis.textContent = current.dataset.axis || "";
+      if (activeLink) activeLink.href = current.getAttribute("href") || "#";
+    }
+
+    if (thumb) {
+      thumb.style.transform = `translate(${progress * 78}px, -50%)`;
+    }
+  }
+
+  renderWheel(0);
+  window.addEventListener("resize", () => renderWheel(ScrollTrigger.getById("course-wheel")?.progress || 0), { passive: true });
+
+  if (section) {
+    ScrollTrigger.create({
+      id: "course-wheel",
+      trigger: section,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.55,
+      onUpdate: (self) => renderWheel(self.progress),
+    });
+  }
+</script>

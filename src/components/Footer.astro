@@ -1,0 +1,12 @@
+---
+import { siteConfig } from "../lib/config";
+---
+
+<footer class="section bg-[var(--color-bg-alt)] border-t border-[var(--color-border)]">
+  <div class="container-main py-12 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-[var(--color-text-muted)]">
+    <p>&copy; {new Date().getFullYear()} {siteConfig.name}. {siteConfig.tagline}</p>
+    <div class="flex items-center gap-6">
+      <a href="#hero" class="hover:text-[var(--color-accent)] transition-colors">回到星图</a>
+    </div>
+  </div>
+</footer>
