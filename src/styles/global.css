@@ -71,6 +71,25 @@
     mix-blend-mode: screen;
   }
 
+  @media (max-width: 767px) {
+    body {
+      background:
+        radial-gradient(circle at 12% 8%, rgba(216, 150, 69, 0.13), transparent 18rem),
+        radial-gradient(circle at 88% 16%, rgba(66, 211, 146, 0.07), transparent 18rem),
+        linear-gradient(180deg, #050606 0%, #090a09 48%, #050606 100%);
+    }
+
+    body::before {
+      position: absolute;
+      background-size: 48px 48px;
+      opacity: 0.55;
+    }
+
+    body::after {
+      display: none;
+    }
+  }
+
   ::selection {
     background: var(--color-accent);
     color: var(--color-bg);

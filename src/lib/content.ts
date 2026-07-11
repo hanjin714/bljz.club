@@ -1,4 +1,5 @@
 export const knowledgeBaseUrl = "https://beilunjuzhen.feishu.cn/wiki/FHdSwbAiYibmL2k6d3bcEZpMnOf?fromScene=spaceOverview";
+export const day4KnowledgeUrl = "https://beilunjuzhen.feishu.cn/wiki/DRrewKGzfiYQo7kU0fIchOujnnb?fromScene=spaceOverview";
 export const serviceSiteUrl = "https://beilunjuzhen.cn";
 
 export type ContentSection = {
@@ -119,26 +120,26 @@ export const courseLessons = [
   {
     slug: "day-04",
     day: "04",
-    title: "爆了不是终点，A 类线索才是",
-    axis: "筛选、分层、转交",
-    summary: "播放和评论只是热闹，A 类线索才接近业务结果。",
-    externalUrl: knowledgeBaseUrl,
+    title: "爆款不是终点，A 类线索才是",
+    axis: "看见、开口、分层、动作",
+    summary: "播放量是被看见，咨询是有人开口，A 类线索才开始接近业务结果。",
+    externalUrl: day4KnowledgeUrl,
     sections: [
       {
-        heading: "A 类线索是什么",
-        body: "在服务范围内，有明确需求，愿意继续沟通，并且存在清晰的下一步动作。",
+        heading: "先把三个词分清",
+        body: "浏览量只是看见，评论和私信只是开口。A 类线索必须能落到业务动作：服务范围匹配、问题足够具体、信息能够判断，并且愿意继续往下走。",
       },
       {
-        heading: "B 类和 C 类怎么处理",
-        body: "B 类继续用内容和材料培养，C 类不强求，把注意力留给更匹配的人。",
+        heading: "A/B/C 不是评价人",
+        body: "A/B/C 只是当下的处理优先级，不是判断客户值不值钱。A 类进入人工跟进，B 类继续用材料和内容养熟，C 类先不占用团队的即时精力。",
       },
       {
-        heading: "团队交接不能只靠一句‘你跟一下’",
-        body: "每条 A 类线索都要有负责人、下一步动作和结果回流。没有回流，前面的内容和筛选就无法复盘。",
+        heading: "AI 可以辅助，但不能替老板拍板",
+        body: "真正稳定的分层要先人工跑一轮。标准清楚之后，AI 可以帮忙摘要、初筛、提醒和回流。判断责任还在业务里，不能甩给工具。",
       },
     ],
-    map: ["互动", "需求判断", "A/B/C", "转交", "成交反馈"],
-    assignment: "给现有线索做一次 A/B/C 分层，并写清楚每条 A 类线索的下一步动作。",
+    map: ["看见", "开口", "事实记录", "A/B/C", "下一步动作"],
+    assignment: "找出最近 20 条评论、私信或咨询，只按 A/B/C 做轻分层，并给每条 A 类线索写清下一步动作。",
   },
   {
     slug: "day-05",
@@ -215,6 +216,43 @@ export const courseLessons = [
 ];
 
 export const articleEntries: ArticleEntry[] = [
+  {
+    slug: "gpt-live-ai-management",
+    num: "00",
+    title: "第一次把 GPT Live 请进直播间，我更关心的不是它会说什么",
+    date: "2026.07.11",
+    series: "现场实验",
+    excerpt: "AI 能进入直播间，但要真正进入业务，仍然绕不开流程、激励和管理责任。",
+    externalUrl: day4KnowledgeUrl,
+    externalLabel: "查看 Day4 公开整理",
+    sections: [
+      {
+        heading: "这次不是做一个热闹的 AI 嘉宾",
+        body: "今天后半段更像一次现场测试：让 GPT Live 进入直播间，和我一起讨论 AI 在企业里的落地。它能接话、能总结、能帮忙压缩观点，但我更关心的不是它像不像嘉宾，而是它能不能把真实业务说清楚。",
+      },
+      {
+        heading: "我自己的入口还是实体零售",
+        body: "我过去做宠物门店，最直观的感受是：客户记忆很容易断。员工一换，历史成交客户、购买周期、服务记录和复购提醒就容易散掉。AI 在这里更像一个会提醒的客户记忆系统，让团队少靠脑子硬撑。",
+      },
+      {
+        heading: "员工愿不愿意用，取决于机制",
+        body: "很多老板以为上一个工具就行了，但员工会先判断这是不是额外负担。真正能推下去的方式，是把 AI 任务和业务结果、绩效动作、成交反馈放在一起，让它看起来是帮他完成工作，而不是凭空多一套流程。",
+      },
+      {
+        heading: "工具放大管理，不代替管理",
+        body: "AI 可以提醒、归纳、发现异常，也可以把重复动作变轻。但流程要不要改，激励怎么设计，谁负责回流结果，这些仍然是管理问题。老板没有决心，软件再聪明也只能停在演示里。",
+      },
+      {
+        heading: "下半年的竞争会更像行业交付",
+        body: "模型仍然会更新，但我更看重谁能把 Agent、workflow 和具体业务场景接起来。跑分会继续存在，真正影响小团队的，是工具能不能进入线索、跟进、复盘和复购这些动作。",
+      },
+      {
+        heading: "这次实验留下的提醒",
+        body: "直播里的 AI 嘉宾不是终点。声音、回音、网络切换、屏幕展示、轮次控制都需要重新设计。它更像一个新入口：可以做播客、可以做复盘，也可以把现场观点变成下一篇文章和知识库。",
+      },
+    ],
+    map: ["现场对谈", "客户记忆", "员工激励", "管理机制", "行业交付"],
+  },
   {
     slug: "why-open-course",
     num: "01",

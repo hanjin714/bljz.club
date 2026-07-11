@@ -3,7 +3,7 @@ import { siteConfig } from "../lib/config";
 ---
 
 <section id="hero" class="relative h-[320vh] overflow-clip bg-[var(--color-bg)]">
-  <div class="sticky top-0 h-screen min-h-[720px] overflow-hidden">
+  <div class="sticky top-0 h-[100svh] min-h-[720px] overflow-hidden">
     <div class="absolute inset-0 z-0 opacity-55">
       <img
         src="/assets/orbital-knowledge-atlas.png"
@@ -31,14 +31,14 @@ import { siteConfig } from "../lib/config";
         <p class="hero-kicker text-xs uppercase tracking-[0.28em] text-[var(--color-accent)]">
           {siteConfig.heroDeck}
         </p>
-        <h1 class="hero-title mt-6 font-display text-[clamp(3.7rem,9vw,9.6rem)] font-black leading-[0.86] text-[var(--color-text)]">
+        <h1 class="hero-title mt-6 font-display text-6xl font-black leading-[0.86] text-[var(--color-text)] md:text-8xl lg:text-[9rem]">
           {siteConfig.name}
         </h1>
-        <p class="hero-subtitle mt-7 max-w-[560px] text-lg leading-8 text-[var(--color-text-secondary)] md:text-xl">
+        <p class="hero-subtitle mt-6 max-w-[560px] text-base leading-7 text-[var(--color-text-secondary)] md:mt-7 md:text-xl md:leading-8">
           AI 是放大器，不是印钞机。这里记录课程、文章、案例和工具判断，把小团队的业务动作先整理成 AI 能接入的结构。
         </p>
 
-        <div class="mt-10 flex flex-wrap gap-3">
+        <div class="mt-8 flex flex-wrap gap-3 md:mt-10">
           <a class="hero-action" href="#course">进入 7 天公开课</a>
           <a class="hero-action ghost" href="#articles">阅读公开文章</a>
         </div>
@@ -71,7 +71,7 @@ import { siteConfig } from "../lib/config";
       </div>
     </div>
 
-    <div class="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[var(--color-text-muted)]">
+    <div class="hero-scroll absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[var(--color-text-muted)]">
       <span>Scroll to unfold</span>
       <div class="h-10 w-px overflow-hidden bg-white/10">
         <div id="scroll-thread" class="h-1/3 w-full bg-[var(--color-accent)]"></div>
@@ -169,11 +169,36 @@ import { siteConfig } from "../lib/config";
 
   @media (max-width: 767px) {
     #hero {
-      height: 260vh;
+      height: 235vh;
     }
 
     #hero .sticky {
-      min-height: 760px;
+      min-height: 640px;
+    }
+
+    #atlas-3d-stage {
+      opacity: 0.72;
+      transform: translate(13%, 8%);
+    }
+
+    #hero .relative.z-10.mx-auto.grid {
+      align-content: center;
+      padding-top: 5.5rem;
+      padding-bottom: 4.5rem;
+    }
+
+    .hero-title {
+      max-width: 7ch;
+    }
+
+    .hero-subtitle {
+      max-width: 21rem;
+    }
+
+    .hero-action {
+      min-height: 40px;
+      padding: 0 0.95rem;
+      font-size: 0.78rem;
     }
 
     .hero-panel {
@@ -182,15 +207,48 @@ import { siteConfig } from "../lib/config";
       border-top: 1px solid rgba(242, 232, 213, 0.12);
       padding-left: 0;
       padding-top: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .hero-panel > p {
+      display: none;
+    }
+
+    #hero-phases {
+      min-height: 112px;
+      margin-top: 0;
     }
 
     .phase {
-      padding-top: 0.65rem;
-      padding-bottom: 0.65rem;
+      display: none;
+      padding: 0.95rem;
+      border: 1px solid rgba(242, 232, 213, 0.12);
+      border-radius: 8px;
+      background: rgba(9, 11, 10, 0.62);
+      backdrop-filter: blur(14px);
     }
 
     .phase::before {
       display: none;
+    }
+
+    .phase.is-active {
+      display: block;
+      transform: none;
+    }
+
+    .phase strong {
+      font-size: 0.98rem;
+    }
+
+    .phase p {
+      font-size: 0.8rem;
+      line-height: 1.65;
+    }
+
+    .hero-scroll {
+      bottom: 1.25rem;
+      opacity: 0.65;
     }
   }
 </style>
@@ -277,8 +335,8 @@ import { siteConfig } from "../lib/config";
     });
 
     const nodes: THREE.Mesh[] = [];
-    const nodeGeo = new THREE.SphereGeometry(0.035, 20, 20);
-    const nodeCount = window.innerWidth < 768 ? 22 : 34;
+    const nodeGeo = new THREE.SphereGeometry(0.035, window.innerWidth < 768 ? 12 : 20, window.innerWidth < 768 ? 12 : 20);
+    const nodeCount = window.innerWidth < 768 ? 14 : 34;
     for (let i = 0; i < nodeCount; i++) {
       const theta = i * 0.74;
       const radius = 1.08 + (i % 4) * 0.54;
@@ -320,12 +378,13 @@ import { siteConfig } from "../lib/config";
 
     function resize() {
       const rect = stage.getBoundingClientRect();
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, rect.width < 768 ? 1.25 : 1.6));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, rect.width < 768 ? 1 : 1.6));
       renderer.setSize(rect.width, rect.height);
       camera.aspect = rect.width / rect.height;
       camera.updateProjectionMatrix();
-      group.position.x = rect.width < 768 ? 0.62 : 1.92;
-      group.scale.setScalar(rect.width < 768 ? 0.66 : 0.92);
+      group.position.x = rect.width < 768 ? 0.86 : 1.92;
+      group.position.y = rect.width < 768 ? -0.18 : 0;
+      group.scale.setScalar(rect.width < 768 ? 0.58 : 0.92);
       if (reduceMotion) renderer.render(scene, camera);
     }
     resize();
