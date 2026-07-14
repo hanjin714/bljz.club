@@ -22,69 +22,116 @@ export function registerScrollAnimations() {
     }
   );
 
-  // Article rows — sequential slide-in
-  gsap.utils.toArray<HTMLElement>(".article-row").forEach((row, index) => {
+  // Principles enter once, then remain still. The pause is more legible than a continuous scrub.
+  gsap.utils.toArray<HTMLElement>(".principle-card").forEach((card, index) => {
     gsap.fromTo(
-      row,
-      { x: index % 2 === 0 ? -90 : 90, opacity: 0.38, scale: 0.94, rotateY: index % 2 === 0 ? -10 : 10 },
+      card,
+      { y: 54, opacity: 0, scale: 0.965, filter: "blur(7px)" },
       {
-        x: 0,
+        y: 0,
         opacity: 1,
         scale: 1,
-        rotateY: 0,
-        ease: "none",
+        filter: "blur(0px)",
+        duration: 0.95,
+        delay: index * 0.08,
+        ease: "expo.out",
         immediateRender: false,
         scrollTrigger: {
-          trigger: row,
-          start: "top bottom",
-          end: "center 54%",
-          scrub: 0.8,
+          trigger: card,
+          start: "top 88%",
+          toggleActions: "play none none none",
+          once: true,
         },
       }
     );
   });
 
-  // Project cards — fade up stagger
-  gsap.utils.toArray<HTMLElement>(".project-card").forEach((card, index) => {
+  // Article slices arrive like suspended frames, then hold perfectly still.
+  const focusIndex = document.getElementById("article-focus-index");
+  const articleRows = gsap.utils.toArray<HTMLElement>(".article-row");
+  const setArticleFocus = (focusedRow: HTMLElement) => {
+    articleRows.forEach((candidate) => candidate.classList.toggle("is-focus", candidate === focusedRow));
+    if (focusIndex) focusIndex.textContent = focusedRow.dataset.articleIndex || "";
+  };
+
+  articleRows.forEach((row, index) => {
     gsap.fromTo(
-      card,
-      { y: 90, opacity: 0.34, scale: 0.9, rotateX: -12 },
+      row,
+      { y: 86, opacity: 0, scale: 0.935, rotateX: 7, filter: "blur(10px)" },
       {
         y: 0,
         opacity: 1,
         scale: 1,
         rotateX: 0,
-        ease: "none",
+        filter: "blur(0px)",
+        duration: 1.18,
+        delay: Math.min(index, 2) * 0.06,
+        ease: "expo.out",
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: row,
+          start: "top 90%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      }
+    );
+
+    ScrollTrigger.create({
+      trigger: row,
+      start: "center 72%",
+      end: "center 28%",
+      onEnter: () => setArticleFocus(row),
+      onEnterBack: () => setArticleFocus(row),
+      onLeave: () => row.classList.remove("is-focus"),
+      onLeaveBack: () => row.classList.remove("is-focus"),
+    });
+  });
+
+  // Case cards use the same one-shot slow-motion entrance.
+  gsap.utils.toArray<HTMLElement>(".project-card").forEach((card, index) => {
+    gsap.fromTo(
+      card,
+      { y: 82, opacity: 0, scale: 0.94, rotateX: 7, filter: "blur(9px)" },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        rotateX: 0,
+        filter: "blur(0px)",
+        duration: 1.05,
+        delay: (index % 2) * 0.09,
+        ease: "expo.out",
         immediateRender: false,
         scrollTrigger: {
           trigger: card,
-          start: "top bottom",
-          end: "center 58%",
-          scrub: 0.9,
+          start: "top 88%",
+          toggleActions: "play none none none",
+          once: true,
         },
-        delay: index * 0.03,
       }
     );
   });
 
-  // Thought items — reveal along timeline
+  // Judgements settle into focus without tracking every scroll pixel.
   gsap.utils.toArray<HTMLElement>(".thought-item").forEach((item, index) => {
     gsap.fromTo(
       item,
-      { x: -70, opacity: 0.3, filter: "blur(5px)" },
+      { y: 58, opacity: 0, filter: "blur(8px)" },
       {
-        x: 0,
+        y: 0,
         opacity: 1,
         filter: "blur(0px)",
-        ease: "none",
+        duration: 0.95,
+        delay: Math.min(index, 2) * 0.06,
+        ease: "expo.out",
         immediateRender: false,
         scrollTrigger: {
           trigger: item,
-          start: "top bottom",
-          end: "center 60%",
-          scrub: 0.8,
+          start: "top 88%",
+          toggleActions: "play none none none",
+          once: true,
         },
-        delay: index * 0.02,
       }
     );
   });

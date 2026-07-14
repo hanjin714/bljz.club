@@ -17,7 +17,7 @@ import { projects } from "../lib/config";
       {projects.map((project, i) => (
         <a
           href={project.link}
-          class="project-card group block rounded-[8px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-border-hover)] hover:bg-[var(--color-surface-hover)] md:p-8"
+          class="project-card group block rounded-[8px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-colors duration-500 hover:border-[var(--color-border-hover)] hover:bg-[var(--color-surface-hover)] md:p-8"
         >
           <span class="text-xs font-mono text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] transition-colors">
             {(i + 1).toString().padStart(2, "0")}

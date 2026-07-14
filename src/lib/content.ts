@@ -1,5 +1,9 @@
 export const knowledgeBaseUrl = "https://beilunjuzhen.feishu.cn/wiki/FHdSwbAiYibmL2k6d3bcEZpMnOf?fromScene=spaceOverview";
+export const day3KnowledgeUrl = "https://beilunjuzhen.feishu.cn/wiki/VQZ9w1bUria1chkKVjHcUQ0lnsd?fromScene=spaceOverview";
 export const day4KnowledgeUrl = "https://beilunjuzhen.feishu.cn/wiki/DRrewKGzfiYQo7kU0fIchOujnnb?fromScene=spaceOverview";
+export const day5KnowledgeUrl = "https://beilunjuzhen.feishu.cn/wiki/GvM5wigBFi9ALOkGMH6cPd8zn6g?fromScene=spaceOverview";
+export const day6KnowledgeUrl = "https://beilunjuzhen.feishu.cn/wiki/QhM5wgMQAi9klhkOEZtcVbfSnSb?fromScene=spaceOverview";
+export const day7KnowledgeUrl = "https://beilunjuzhen.feishu.cn/wiki/VjKcwdbZriolDFkSOidc1Kmsnyd?fromScene=spaceOverview";
 export const serviceSiteUrl = "https://beilunjuzhen.cn";
 
 export type ContentSection = {
@@ -99,7 +103,7 @@ export const courseLessons = [
     title: "从内容到线索记录",
     axis: "评论、咨询、资料的承接",
     summary: "内容发出去之后，真正的工作才刚开始。",
-    externalUrl: knowledgeBaseUrl,
+    externalUrl: day3KnowledgeUrl,
     sections: [
       {
         heading: "承接不是一句话术",
@@ -147,7 +151,7 @@ export const courseLessons = [
     title: "Agent、workflow、Codex 怎么选",
     axis: "工具边界与业务动作",
     summary: "工具不是信仰，不同动作需要不同执行器。",
-    externalUrl: knowledgeBaseUrl,
+    externalUrl: day5KnowledgeUrl,
     sections: [
       {
         heading: "临时判断用 Agent",
@@ -171,7 +175,7 @@ export const courseLessons = [
     title: "业务诊断：哪里该人工，哪里该自动",
     axis: "先跑清判断，再决定自动化",
     summary: "先看清业务循环，再决定 AI 应该进入哪一步。",
-    externalUrl: knowledgeBaseUrl,
+    externalUrl: day6KnowledgeUrl,
     sections: [
       {
         heading: "诊断从客户路径开始",
@@ -193,29 +197,87 @@ export const courseLessons = [
     slug: "day-07",
     day: "07",
     title: "7 天后如何继续加深",
-    axis: "复购飞轮与内容资产",
-    summary: "7 天不是结束，是把内容和业务动作变成长期资产的开始。",
-    externalUrl: knowledgeBaseUrl,
+    axis: "复盘节奏与增长资产",
+    summary: "七天不是结束，而是让一条小团队业务链第一次可见，下一轮才知道该加深内容、线索还是工具。",
+    externalUrl: day7KnowledgeUrl,
     sections: [
       {
-        heading: "复盘什么",
-        body: "看哪类内容带来有效咨询，哪类线索最容易推进，哪一步最常断掉。",
+        heading: "七天不是结课，是第一次看清业务线",
+        body: "这七天不只是回放、PPT 和资料。它更像一次把业务从感觉里拎出来的过程：内容怎么让人看见，用户怎么开口，线索怎么记录，谁负责下一步，结果怎么回到下一轮内容里。",
       },
       {
-        heading: "沉淀什么",
-        body: "沉淀基础表、用户问题、案例素材、跟进节点和复购触发条件。它们会变成下一轮内容和工具的输入。",
+        heading: "最后留下四类资产",
+        body: "课程结束后，真正该留下的是内容资产、线索资产、判断资产和工具资产。内容资产让下一轮不靠感觉，线索资产让客户不睡在聊天框里，判断资产保护团队注意力，工具资产才决定哪些动作可以交给 Agent、workflow 或 Codex。",
+        bullets: [
+          "内容资产：用户反复问的问题、能带来开口的选题、适合继续拍的系列。",
+          "线索资产：来源、客户原话、客户阶段、负责人、下一步动作和结果回流。",
+          "判断资产：A/B/C 分层标准、行业字段、员工判断依据。",
+          "工具资产：稳定、重复、低风险的动作，才逐步工具化。",
+        ],
       },
       {
-        heading: "下一轮怎么做",
-        body: "把表现好的内容变成系列，把有效字段变成流程，把重复动作逐步工具化。每一轮只解决一个最靠近结果的断点。",
+        heading: "下一轮只回答六个问题",
+        body: "第七天之后，不需要把团队管理做成很复杂的系统。每天只要回答：今天有没有内容入口、有没有人开口、有没有记录、A 类线索有没有下一步、结果有没有回到表里、明天只改哪一个点。数据不是为了证明努力，是为了看清业务断在哪里。",
+      },
+      {
+        heading: "加深方向只有三个",
+        body: "下一轮可以加深内容、线索或工具。内容加深，是把有效开口最多的主题拆成新的 7 天系列。线索加深，是把 A/B/C 标准跑得更准。工具加深，是把最稳定、最重复、风险最低的动作交给 AI。",
+        note: "工具资产一定不是第一位。内容没有带来开口，线索没有进入记录，判断标准没有跑过，工具只会变成漂亮但没人用的系统。",
+      },
+      {
+        heading: "课程结束后，Skill 才刚开始",
+        body: "这七天公开课最后会沉淀成悖论增长谋士 Skill。它不是资料包，而是一份可以继续调用的工作说明：准备内容、整理评论、设计线索表、判断工具边界、跑完一轮后继续优化下一轮。",
       },
     ],
-    map: ["内容资产", "线索资产", "客户记忆", "复购节点", "工具化"],
-    assignment: "写出下一轮 7 天内容主题，并标记每条内容对应哪个业务漏点。",
+    map: ["业务可见", "四类资产", "六个问题", "三种加深", "Skill 沉淀"],
+    assignment: "写出下一轮 7 天计划：最大漏点是什么，先加深内容、线索还是工具，每天记录什么，A 类线索是什么标准，哪一步继续人工判断，哪一步可以尝试交给 AI。",
   },
 ];
 
 export const articleEntries: ArticleEntry[] = [
+  {
+    slug: "seven-days-after-ai-growth-loop",
+    num: "07",
+    title: "七天公开课结束，我更想留下的是下一轮还能跑的节奏",
+    date: "2026.07.14",
+    series: "公开课收束",
+    excerpt: "7 天不是结课，而是让小团队第一次看清内容、线索、判断和工具四类增长资产。",
+    externalUrl: day7KnowledgeUrl,
+    externalLabel: "查看 Day7 公开整理",
+    sections: [
+      {
+        heading: "这不是一个很大的结课仪式",
+        body: "今天是这一轮 7 天公开课的最后一天，但我不太想把它讲成一个很大的收尾。对小团队来说，七天真正的价值不是听完多少概念，而是第一次把一条业务线看清楚：内容怎么让人看见，用户怎么开口，线索怎么记录，谁负责下一步，结果怎么回到下一轮内容里。",
+      },
+      {
+        heading: "七天之后，别重新回到原来的散",
+        body: "很多课程结束以后，会留下回放、PPT 和一堆资料。资料当然有用，但如果第二天团队还是不知道客户从哪里来、员工怎么接、A 类线索是谁、下一步谁负责，那它很快就会变成一句“我好像听过”。所以第七天真正要解决的，是怎么让这一轮继续跑下去。",
+      },
+      {
+        heading: "最后留下来的，是四类资产",
+        body: "这 7 天真正留下来的不是资料包，而是内容资产、线索资产、判断资产和工具资产。内容资产让下一轮不靠感觉，线索资产让客户不睡在聊天框里，判断资产保护团队注意力，工具资产才决定哪些动作可以交给 Agent、workflow 或 Codex。",
+        bullets: [
+          "内容资产：用户反复问的问题，能带来开口的选题，适合继续拆的系列。",
+          "线索资产：来源、客户原话、阶段、负责人、下一步动作和结果回流。",
+          "判断资产：A/B/C 分层标准，行业字段，员工判断依据。",
+          "工具资产：稳定、重复、低风险的动作，才逐步工具化。",
+        ],
+      },
+      {
+        heading: "下一轮每天只回答六个问题",
+        body: "第七天之后，不需要马上做一个很复杂的系统。每天只要回答六个问题：今天有没有内容入口？有没有人开口？开口以后有没有记录？A 类线索有没有下一步？结果有没有回到表里？明天只改哪一个点？数据不是为了证明团队努力，是为了让团队看清业务断在哪里。",
+      },
+      {
+        heading: "先加深内容和线索，再加深工具",
+        body: "下一轮可以加深内容、线索或工具。内容加深，是把有效开口最多的主题拆成新的 7 天系列。线索加深，是把 A/B/C 标准跑得更准。工具加深，是把最稳定、最重复、风险最低的动作交给 AI。顺序不要反过来。流程没跑通，自动化只会放大混乱。",
+      },
+      {
+        heading: "课程结束后，Skill 才刚开始",
+        body: "这七天公开课会沉淀成悖论增长谋士 Skill。它不是一个静态资料包，更像一份可以继续调用的工作说明：准备内容、整理评论、设计线索表、判断工具边界、跑完一轮后继续优化下一轮。公开版只展开判断框架、基础动作和可执行作业，真正复杂的行业字段和自动化方案，还是要回到真实业务里判断。",
+      },
+    ],
+    map: ["业务可见", "四类资产", "六个问题", "下一轮七天", "Skill 沉淀"],
+  },
   {
     slug: "gpt-live-ai-management",
     num: "00",

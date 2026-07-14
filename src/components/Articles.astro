@@ -15,43 +15,54 @@ const articleTracks = [
 ];
 ---
 
-<section id="articles" class="section bg-[var(--color-bg)]">
-  <div class="container-main">
-    <p class="section-label">Writings</p>
+<section id="articles" class="article-field section bg-[var(--color-bg)]">
+  <div class="container-main article-layout">
+    <header class="article-manifesto">
+      <p class="section-label">Writings</p>
+      <h2 class="max-w-xl font-display text-3xl font-black leading-tight md:text-5xl">
+        公开文章不是资料堆放，是认知路径。
+      </h2>
+      <p class="mt-6 max-w-md text-sm leading-7 text-[var(--color-text-secondary)] md:text-base md:leading-8">
+        每一篇只解决一个真实问题。滚动到中央，时间放慢；判断停住以后，再决定要不要继续往里读。
+      </p>
 
-    <h2 class="mb-16 max-w-2xl font-display text-3xl font-black leading-tight tracking-tight md:text-5xl">
-      公开文章不是资料堆放，是认知路径。
-    </h2>
+      <div class="article-readout" aria-hidden="true">
+        <span>Reading field</span>
+        <strong id="article-focus-index">01</strong>
+        <i></i>
+      </div>
+    </header>
 
-    <div class="space-y-14">
+    <div class="article-stream">
       {articleTracks.map((track) => (
-        <div>
-          <div class="mb-4 flex items-end justify-between gap-4 border-b border-[var(--color-border)] px-4 pb-4 md:px-6">
+        <div class="article-track">
+          <div class="track-heading">
             <div>
-              <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)]">{track.label}</p>
-              <h3 class="mt-2 font-display text-xl font-bold md:text-2xl">{track.title}</h3>
+              <p>{track.label}</p>
+              <h3>{track.title}</h3>
             </div>
-            <span class="font-mono text-xs text-[var(--color-text-muted)]">{String(track.entries.length).padStart(2, "0")}</span>
+            <span>{String(track.entries.length).padStart(2, "0")}</span>
           </div>
 
-          <div class="space-y-1">
+          <div class="article-slices">
             {track.entries.map((a) => (
               <a
                 href={`/articles/${a.slug}`}
-                class="article-row group flex items-start gap-5 rounded-[8px] border border-transparent px-4 py-6 transition-all duration-300 hover:border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] md:gap-10 md:px-6"
+                class="article-row group"
+                data-article-index={a.num}
               >
-                <span class="shrink-0 pt-0.5 font-mono text-sm text-[var(--color-text-muted)] transition-colors group-hover:text-[var(--color-accent)]">
-                  {a.num}
-                </span>
-                <div class="min-w-0 flex-1">
-                  <p class="mb-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-muted)]">{a.series}</p>
-                  <h4 class="text-lg font-semibold tracking-tight transition-colors group-hover:text-white md:text-xl">
-                    {a.title}
-                  </h4>
-                  <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{a.excerpt}</p>
+                <div class="article-plane">
+                  <span class="article-number">{a.num}</span>
+                  <div class="min-w-0 flex-1">
+                    <p class="article-series">{a.series}</p>
+                    <h4>{a.title}</h4>
+                    <p class="article-excerpt">{a.excerpt}</p>
+                    <div class="article-meta">
+                      <span>{a.date}</span>
+                      <span>阅读全文</span>
+                    </div>
+                  </div>
                 </div>
-                <span class="hidden shrink-0 pt-5 font-mono text-sm text-[var(--color-text-muted)] md:block">{a.date}</span>
-                <span class="hidden shrink-0 items-center pt-5 text-sm text-[var(--color-text-muted)] transition-all duration-300 group-hover:translate-x-1 group-hover:text-[var(--color-accent)] md:flex">打开</span>
               </a>
             ))}
           </div>
@@ -60,3 +71,251 @@ const articleTracks = [
     </div>
   </div>
 </section>
+
+<style>
+  .article-field {
+    isolation: isolate;
+    background:
+      linear-gradient(90deg, rgba(216, 150, 69, 0.035), transparent 34%),
+      var(--color-bg);
+  }
+
+  .article-field::before {
+    content: "";
+    position: absolute;
+    inset: 7rem 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(242, 232, 213, 0.14), transparent);
+  }
+
+  .article-layout {
+    display: grid;
+    gap: 5rem;
+  }
+
+  .article-manifesto {
+    align-self: start;
+  }
+
+  .article-readout {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    gap: 0.9rem;
+    max-width: 22rem;
+    margin-top: 3rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .article-readout strong {
+    color: var(--color-accent);
+    font-size: 0.76rem;
+  }
+
+  .article-readout i {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(216, 150, 69, 0.75), transparent);
+    transform-origin: left;
+  }
+
+  .article-stream {
+    min-width: 0;
+  }
+
+  .article-track + .article-track {
+    margin-top: 5rem;
+  }
+
+  .track-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .track-heading p,
+  .track-heading > span {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .track-heading p {
+    color: var(--color-accent);
+  }
+
+  .track-heading h3 {
+    margin-top: 0.45rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  .article-slices {
+    display: grid;
+    gap: 1.15rem;
+    perspective: 1100px;
+  }
+
+  .article-row {
+    display: block;
+    outline: none;
+    transform-style: preserve-3d;
+  }
+
+  .article-plane {
+    position: relative;
+    display: flex;
+    gap: 1.25rem;
+    min-height: 190px;
+    padding: 1.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(242, 232, 213, 0.09);
+    border-radius: 8px;
+    background:
+      linear-gradient(135deg, rgba(242, 232, 213, 0.055), rgba(5, 6, 6, 0.78) 62%),
+      rgba(14, 17, 15, 0.82);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+    transform: translate3d(0, 0, 0) scale(0.985);
+    transition:
+      transform 720ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 520ms ease,
+      background 520ms ease,
+      box-shadow 720ms ease;
+  }
+
+  .article-plane::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(216, 150, 69, 0.7), transparent);
+    opacity: 0;
+    transform: scaleX(0.25);
+    transition: opacity 520ms ease, transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .article-row.is-focus .article-plane,
+  .article-row:hover .article-plane,
+  .article-row:focus-visible .article-plane {
+    border-color: rgba(216, 150, 69, 0.28);
+    background:
+      linear-gradient(135deg, rgba(216, 150, 69, 0.1), rgba(66, 211, 146, 0.045) 54%, rgba(5, 6, 6, 0.82)),
+      rgba(14, 17, 15, 0.9);
+    box-shadow: 0 34px 100px rgba(0, 0, 0, 0.42), 0 0 70px rgba(216, 150, 69, 0.045);
+    transform: translate3d(0, -5px, 26px) scale(1);
+  }
+
+  .article-row.is-focus .article-plane::after,
+  .article-row:hover .article-plane::after,
+  .article-row:focus-visible .article-plane::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .article-number {
+    flex: 0 0 auto;
+    padding-top: 0.1rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    transition: color 420ms ease;
+  }
+
+  .article-row.is-focus .article-number,
+  .article-row:hover .article-number {
+    color: var(--color-accent);
+  }
+
+  .article-series {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .article-plane h4 {
+    margin-top: 0.5rem;
+    color: var(--color-text);
+    font-size: 1.18rem;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  .article-excerpt {
+    margin-top: 0.7rem;
+    color: var(--color-text-secondary);
+    font-size: 0.86rem;
+    line-height: 1.8;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.2rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+  }
+
+  .article-meta span:last-child {
+    color: var(--color-accent);
+  }
+
+  @media (min-width: 900px) {
+    .article-layout {
+      grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+      gap: clamp(4rem, 8vw, 8rem);
+    }
+
+    .article-manifesto {
+      position: sticky;
+      top: 8rem;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .article-layout {
+      gap: 3.5rem;
+    }
+
+    .article-readout {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .article-plane {
+      min-height: 0;
+      gap: 0.9rem;
+      padding: 1.15rem;
+    }
+
+    .article-plane h4 {
+      font-size: 1.05rem;
+    }
+
+    .article-excerpt {
+      font-size: 0.8rem;
+      line-height: 1.72;
+    }
+
+    .article-row.is-focus .article-plane,
+    .article-row:hover .article-plane,
+    .article-row:focus-visible .article-plane {
+      transform: translate3d(0, -3px, 0) scale(1);
+    }
+  }
+</style>

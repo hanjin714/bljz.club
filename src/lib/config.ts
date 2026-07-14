@@ -19,7 +19,7 @@ export const siteConfig = {
   ],
   stats: [
     { value: "7", label: "Day Course" },
-    { value: "9", label: "Public Notes" },
+    { value: "11", label: "Public Notes" },
     { value: "7", label: "Case Maps" },
     { value: "1", label: "Business Loop" },
   ],
