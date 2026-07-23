@@ -19,6 +19,8 @@ const {
       const body = typeof section === "string" ? section : section.body;
       const bullets = typeof section === "string" ? undefined : section.bullets;
       const note = typeof section === "string" ? undefined : section.note;
+      const image = typeof section === "string" ? undefined : section.image;
+      const imageAlt = typeof section === "string" ? undefined : section.imageAlt;
       return (
         <div class="rounded-[8px] border border-[var(--color-border)] bg-[rgba(242,232,213,0.045)] p-5 backdrop-blur-md md:p-8">
           <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">
@@ -30,6 +32,16 @@ const {
             <ul class="knowledge-list mt-6 space-y-3 text-sm leading-7 text-[var(--color-text-secondary)]">
               {bullets.map((item) => <li>{item}</li>)}
             </ul>
+          )}
+          {image && (
+            <figure class="section-media mt-7 overflow-hidden rounded-[6px] border border-[var(--color-border)] bg-black/30">
+              <img
+                src={image}
+                alt={imageAlt ?? ""}
+                class="h-auto w-full object-contain"
+                loading="lazy"
+              />
+            </figure>
           )}
           {note && (
             <p class="mt-6 border-l-2 border-[var(--color-accent)] pl-4 text-sm leading-7 text-[var(--color-text-muted)]">

@@ -23,7 +23,6 @@ const {
 const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(canonicalPath ?? Astro.url.pathname, siteOrigin);
 const socialImageUrl = new URL(image ?? "/assets/orbital-knowledge-atlas.png", siteOrigin);
-const titleWithBreaks = title.split("").join("<wbr />");
 ---
 
 <!doctype html>
@@ -61,7 +60,7 @@ const titleWithBreaks = title.split("").join("<wbr />");
         <p class="section-label mt-8 md:mt-12">{eyebrow}</p>
         <div class="grid gap-7 md:grid-cols-[0.76fr_0.24fr] md:gap-10">
           <div class="min-w-0">
-            <h1 class="content-title font-display text-2xl font-black leading-tight tracking-tight md:text-7xl" aria-label={title} style="max-width: calc(100vw - 4rem); overflow-wrap: anywhere; word-break: break-all; white-space: normal;" set:html={titleWithBreaks} />
+            <h1 class="content-title font-display text-2xl font-black leading-tight tracking-tight md:text-7xl" aria-label={title}>{title}</h1>
             <p class="mt-5 max-w-2xl text-base leading-8 text-[var(--color-text-secondary)] md:mt-7 md:text-lg md:leading-9">
               {summary}
             </p>
@@ -107,7 +106,8 @@ const titleWithBreaks = title.split("").join("<wbr />");
   .content-title {
     max-width: 100%;
     overflow-wrap: anywhere;
-    word-break: break-all;
+    word-break: normal;
+    white-space: normal;
   }
 
   @media (max-width: 767px) {

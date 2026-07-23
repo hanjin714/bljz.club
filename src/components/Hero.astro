@@ -1,5 +1,6 @@
 ---
 const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill";
+const matrixSkillUrl = "/articles/matrix-ppt-skills";
 ---
 
 <section id="hero" class="relative h-[285vh] overflow-clip bg-[var(--color-bg)]">
@@ -26,29 +27,29 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
       </div>
     </div>
 
-    <div class="hero-grid relative z-10 mx-auto grid h-full max-w-[1240px] grid-cols-1 items-center gap-9 px-5 pt-24 md:grid-cols-[0.92fr_1.08fr] md:px-10">
+    <div class="hero-grid relative z-10 mx-auto grid h-full max-w-[1240px] grid-cols-1 items-center gap-9 px-5 pt-24 md:grid-cols-[0.72fr_1.28fr] md:px-10">
       <div class="hero-copy max-w-[610px]">
         <p class="hero-eyebrow">
-          Now Available · Public Skill
+          Now Available · 2 Public Skills
         </p>
         <h1 class="hero-title mt-6 font-display font-black text-[var(--color-text)]">
           <span>现已推出：</span>
-          悖论AI增长谋士 Skills
+          悖论矩阵双 Skill
         </h1>
         <p class="hero-subtitle mt-6 max-w-[560px] text-base leading-7 text-[var(--color-text-secondary)] md:mt-7 md:text-xl md:leading-8">
-          一套面向小团队、实体生意和新媒体转化的 AI O2O 增长方法论。先看业务循环，再找漏点，最后把内容、线索、判断和工具动作沉淀成可复用的 Skill。
+          一套处理小团队 AI 增长与转化，一套重新组织演示、空间叙事和视觉生产。它们不是资料包，而是可以被 Agent 读取、执行和持续迭代的工作系统。
         </p>
 
-        <div class="launch-shelf mt-8 md:mt-10">
-          <div class="app-icon" aria-hidden="true">
-            <img src="/assets/paradox-growth-advisor-skill-hero.png" alt="" loading="eager" />
-          </div>
-          <div class="launch-meta">
-            <strong>Paradox Growth Advisor</strong>
-            <span>Public Skill · GitHub</span>
-          </div>
-          <a class="hero-action primary" href={skillRepoUrl} target="_blank" rel="noreferrer">
-            查看仓库
+        <div class="release-index mt-8 md:mt-10">
+          <a href={skillRepoUrl} target="_blank" rel="noreferrer">
+            <span>01</span>
+            <strong>AI 增长谋士</strong>
+            <small>O2O Growth</small>
+          </a>
+          <a href={matrixSkillUrl}>
+            <span>02</span>
+            <strong>Matrix PPT</strong>
+            <small>Spatial Storytelling</small>
           </a>
         </div>
 
@@ -69,50 +70,41 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
           </div>
           <div class="product-copy">
             <div class="product-badges">
-              <span>v1.0</span>
-              <span>Public Release</span>
+              <span>现已推出</span>
+              <span>Open Source</span>
             </div>
-            <h2>小团队 AI O2O 增长转化系统方法论</h2>
-            <p>把 7 天公开课、个人表达风格、AI 产品经理思维和业务诊断动作，整理成一个可以被调用、确认、执行、再迭代的 Skill。</p>
+            <h2>悖论 AI 增长谋士</h2>
+            <p>面向小团队、实体生意和新媒体转化，从业务循环、最大漏点走到执行与回填。</p>
             <div class="product-stats" aria-label="Skill 内容摘要">
               <span><strong>7</strong>Day</span>
-              <span><strong>12</strong>Modules</span>
               <span><strong>O2O</strong>Growth</span>
+              <span><strong>AI</strong>PM</span>
             </div>
           </div>
         </a>
 
-        <div class="hero-panel">
-          <div class="hero-panel-head">
-            <div>
-              <p>Current Module</p>
-              <span>Skill execution loop</span>
-            </div>
-            <strong id="hero-phase-counter">01 / 04</strong>
+        <a class="skill-product matrix-product" href={matrixSkillUrl} aria-label="阅读 Matrix PPT Skills 详细介绍">
+          <div class="product-art">
+            <img
+              src="/assets/matrix-ppt/cover.png"
+              alt="Matrix PPT Skills 空间叙事演示视觉"
+              loading="eager"
+            />
           </div>
-          <div class="phase-stack" id="hero-phases">
-            <div class="phase is-active" data-phase="0">
-              <span>01</span>
-              <strong>业务诊断</strong>
-              <p>先用一句话讲清业务循环，再找最大漏点。</p>
+          <div class="product-copy">
+            <div class="product-badges">
+              <span>现已推出</span>
+              <span>Open Source</span>
             </div>
-            <div class="phase" data-phase="1">
-              <span>02</span>
-              <strong>内容与线索</strong>
-              <p>让内容不只负责播放量，也负责开口和记录。</p>
-            </div>
-            <div class="phase" data-phase="2">
-              <span>03</span>
-              <strong>工具边界</strong>
-              <p>Agent 处理变化，workflow 处理重复，Codex 处理长期工具化。</p>
-            </div>
-            <div class="phase" data-phase="3">
-              <span>04</span>
-              <strong>执行迭代</strong>
-              <p>用户确认后定制产出，再把结果回到下一轮优化。</p>
+            <h2>Matrix PPT Skills</h2>
+            <p>让多个 16:9 面板共存于一张空间画布，以镜头、共享元素和页内状态机完成演示。</p>
+            <div class="product-stats" aria-label="Skill 内容摘要">
+              <span><strong>24</strong>Styles</span>
+              <span><strong>3D</strong>Canvas</span>
+              <span><strong>HTML</strong>Deck</span>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
 
@@ -156,58 +148,43 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
     letter-spacing: 0.14em;
   }
 
-  .launch-shelf {
+  .release-index {
     display: grid;
-    grid-template-columns: 58px minmax(0, 1fr) auto;
+    max-width: 560px;
+    border-top: 1px solid rgba(242, 232, 213, 0.14);
+  }
+
+  .release-index a {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
     align-items: center;
-    gap: 0.9rem;
-    max-width: 520px;
-    padding: 0.68rem;
-    border: 1px solid rgba(242, 232, 213, 0.11);
-    border-radius: 22px;
-    background: rgba(242, 232, 213, 0.055);
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
-    backdrop-filter: blur(18px);
-  }
-
-  .app-icon {
-    height: 58px;
-    width: 58px;
-    overflow: hidden;
-    border-radius: 16px;
-    border: 1px solid rgba(242, 232, 213, 0.12);
-    background: rgba(216, 150, 69, 0.1);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 14px 34px rgba(0, 0, 0, 0.34);
-  }
-
-  .app-icon img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-
-  .launch-meta {
-    min-width: 0;
-  }
-
-  .launch-meta strong {
-    display: block;
-    overflow: hidden;
+    gap: 0.8rem;
+    min-height: 58px;
+    border-bottom: 1px solid rgba(242, 232, 213, 0.1);
     color: var(--color-text);
-    font-size: 0.96rem;
-    line-height: 1.3;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    transition: border-color 240ms ease, color 240ms ease, transform 240ms ease;
   }
 
-  .launch-meta span {
-    display: block;
-    margin-top: 0.2rem;
+  .release-index a:hover {
+    transform: translateX(5px);
+    border-color: rgba(66, 211, 146, 0.48);
+  }
+
+  .release-index span,
+  .release-index small {
     color: var(--color-text-muted);
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+  }
+
+  .release-index strong {
+    font-size: 0.92rem;
+  }
+
+  .release-index small {
+    text-align: right;
   }
 
   .hero-action {
@@ -244,8 +221,8 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
 
   .hero-showcase {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.78fr);
-    align-items: center;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
     gap: 1.4rem;
   }
 
@@ -269,7 +246,7 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
   }
 
   .product-art {
-    aspect-ratio: 1.18;
+    aspect-ratio: 2.05;
     overflow: hidden;
     border-bottom: 1px solid rgba(242, 232, 213, 0.08);
   }
@@ -279,6 +256,11 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
     width: 100%;
     object-fit: cover;
     transform: scale(1.02);
+  }
+
+  .matrix-product .product-art img {
+    object-fit: contain;
+    transform: none;
   }
 
   .product-copy {
@@ -312,7 +294,7 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
     margin-top: 0.9rem;
     color: var(--color-text);
     font-family: var(--font-display);
-    font-size: clamp(1.45rem, 2.05vw, 2.2rem);
+    font-size: clamp(1.35rem, 1.7vw, 1.9rem);
     line-height: 1.08;
     letter-spacing: 0;
   }
@@ -341,131 +323,6 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
     font-size: 0.72rem;
   }
 
-  .hero-panel {
-    position: relative;
-    min-height: 360px;
-    border-left: 1px solid rgba(242, 232, 213, 0.14);
-    padding-left: 1.4rem;
-    perspective: 1100px;
-  }
-
-  .hero-panel::after {
-    content: "";
-    position: absolute;
-    left: -1px;
-    top: 0;
-    width: 1px;
-    height: 28%;
-    background: linear-gradient(180deg, transparent, var(--color-signal), transparent);
-    box-shadow: 0 0 28px rgba(66, 211, 146, 0.48);
-    transform-origin: top;
-  }
-
-  .hero-panel-head {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-bottom: 1.2rem;
-    border-bottom: 1px solid rgba(242, 232, 213, 0.1);
-  }
-
-  .hero-panel-head p,
-  .hero-panel-head strong,
-  .hero-panel-head span {
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-  }
-
-  .hero-panel-head p {
-    color: var(--color-text-secondary);
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-  }
-
-  .hero-panel-head span {
-    display: block;
-    margin-top: 0.45rem;
-    color: var(--color-text-muted);
-    font-size: 0.55rem;
-    letter-spacing: 0.14em;
-  }
-
-  .hero-panel-head strong {
-    color: var(--color-accent);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-  }
-
-  .phase-stack {
-    position: relative;
-    height: 276px;
-    margin-top: 1.25rem;
-    overflow: hidden;
-    transform-style: preserve-3d;
-  }
-
-  .phase {
-    position: absolute;
-    inset: 0 0 auto;
-    min-height: 138px;
-    padding: 1.35rem 1.45rem;
-    overflow: hidden;
-    border: 1px solid rgba(242, 232, 213, 0.09);
-    border-radius: 8px;
-    background: linear-gradient(135deg, rgba(242, 232, 213, 0.06), rgba(5, 6, 6, 0.78));
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
-    color: var(--color-text-muted);
-    opacity: 0;
-    transform-origin: 50% 20%;
-    will-change: transform, opacity, filter;
-  }
-
-  .phase::before {
-    content: "";
-    position: absolute;
-    inset: auto 0 0;
-    height: 1px;
-    background: linear-gradient(90deg, var(--color-signal), rgba(216, 150, 69, 0.7), transparent 78%);
-    opacity: 0;
-    transform: scaleX(0.18);
-    transform-origin: left;
-    transition: opacity 460ms ease, transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .phase span {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--color-accent);
-  }
-
-  .phase strong {
-    display: block;
-    margin-top: 0.45rem;
-    color: inherit;
-    font-family: var(--font-display);
-    font-size: 1.18rem;
-  }
-
-  .phase p {
-    max-width: 25rem;
-    margin-top: 0.55rem;
-    font-size: 0.84rem;
-    line-height: 1.75;
-  }
-
-  .phase.is-active {
-    color: var(--color-text);
-    border-color: rgba(66, 211, 146, 0.34);
-    background: linear-gradient(135deg, rgba(66, 211, 146, 0.12), rgba(216, 150, 69, 0.09), rgba(5, 6, 6, 0.88));
-    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.46), 0 0 68px rgba(66, 211, 146, 0.055);
-  }
-
-  .phase.is-active::before {
-    opacity: 1;
-    transform: scaleX(1);
-  }
-
   @media (max-width: 767px) {
     #hero {
       height: 230vh;
@@ -489,7 +346,7 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
     }
 
     .hero-title {
-      max-width: 9.8ch;
+      max-width: 10.6ch;
       font-size: clamp(2.55rem, 12vw, 3.55rem);
       line-height: 1.04;
     }
@@ -498,21 +355,13 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
       max-width: 21rem;
     }
 
-    .launch-shelf {
-      grid-template-columns: 48px minmax(0, 1fr);
-      max-width: 100%;
-      border-radius: 18px;
+    .release-index a {
+      grid-template-columns: 1.7rem minmax(0, 1fr);
+      min-height: 50px;
     }
 
-    .app-icon {
-      height: 48px;
-      width: 48px;
-      border-radius: 14px;
-    }
-
-    .launch-shelf .hero-action {
-      grid-column: 1 / -1;
-      width: 100%;
+    .release-index small {
+      display: none;
     }
 
     .hero-action {
@@ -532,7 +381,7 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
     }
 
     .product-art {
-      aspect-ratio: 2.2;
+      aspect-ratio: 2.15;
     }
 
     .product-copy {
@@ -548,51 +397,6 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
       display: none;
     }
 
-    .hero-panel {
-      min-height: 170px;
-      max-width: none;
-      border-left: 0;
-      border-top: 1px solid rgba(242, 232, 213, 0.12);
-      padding-left: 0;
-      padding-top: 1rem;
-      margin-top: 1.25rem;
-    }
-
-    .hero-panel::after {
-      top: -1px;
-      left: 0;
-      width: 34%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--color-signal), transparent);
-    }
-
-    .hero-panel-head {
-      padding-bottom: 0.7rem;
-    }
-
-    .hero-panel-head span {
-      display: none;
-    }
-
-    .phase-stack {
-      height: 112px;
-      margin-top: 0.8rem;
-    }
-
-    .phase {
-      min-height: 112px;
-      padding: 0.9rem 1rem;
-    }
-
-    .phase strong {
-      font-size: 0.98rem;
-    }
-
-    .phase p {
-      font-size: 0.8rem;
-      line-height: 1.65;
-    }
-
     .hero-scroll {
       bottom: 1.25rem;
       opacity: 0.65;
@@ -606,41 +410,10 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const phaseEls = Array.from(document.querySelectorAll<HTMLElement>(".phase"));
   const scrollThread = document.getElementById("scroll-thread");
-  const phaseCounter = document.getElementById("hero-phase-counter");
-  let currentPhase = -1;
-
-  function renderPhases(activeIndex: number, immediate = false) {
-    if (activeIndex === currentPhase && !immediate) return;
-    currentPhase = activeIndex;
-    const mobile = window.innerWidth < 768;
-
-    phaseEls.forEach((el, index) => {
-      const offset = index - activeIndex;
-      const distance = Math.abs(offset);
-      el.classList.toggle("is-active", offset === 0);
-      gsap.to(el, {
-        x: mobile ? distance * 5 : distance * 16,
-        y: mobile ? offset * 24 : offset * 82,
-        z: offset === 0 ? 34 : -distance * 48,
-        scale: offset === 0 ? 1 : Math.max(mobile ? 0.93 : 0.84, 1 - distance * 0.075),
-        opacity: offset === 0 ? 1 : Math.max(mobile ? 0 : 0.12, 0.5 - distance * 0.14),
-        filter: `blur(${offset === 0 ? 0 : Math.min(5, distance * 1.4)}px)`,
-        rotateX: mobile ? 0 : offset * -3,
-        duration: immediate ? 0 : 0.72,
-        ease: "expo.out",
-        overwrite: true,
-      });
-    });
-
-    if (phaseCounter) phaseCounter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / 04`;
-  }
-
-  renderPhases(0, true);
 
   gsap.fromTo(
-    ".hero-eyebrow, .hero-title, .hero-subtitle, .launch-shelf, .hero-action.ghost, .skill-product, .hero-panel",
+    ".hero-eyebrow, .hero-title, .hero-subtitle, .release-index, .hero-action.ghost, .skill-product",
     { y: 34, opacity: 0 },
     { y: 0, opacity: 1, duration: 1.1, stagger: 0.08, ease: "power3.out" }
   );
@@ -651,16 +424,12 @@ const skillRepoUrl = "https://github.com/hanjin714/paradox-growth-advisor-skill"
     end: "bottom bottom",
     scrub: true,
     onUpdate: (self) => {
-      const phase = Math.min(3, Math.floor(self.progress * 4));
-      renderPhases(phase);
       if (scrollThread) {
         scrollThread.style.transform = `translateY(${self.progress * 70}px)`;
       }
       window.dispatchEvent(new CustomEvent("atlas-progress", { detail: self.progress }));
     },
   });
-
-  window.addEventListener("resize", () => renderPhases(currentPhase, true), { passive: true });
 
   async function initAtlas() {
     const THREE = await import("three");

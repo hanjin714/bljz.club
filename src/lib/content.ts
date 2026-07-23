@@ -11,6 +11,8 @@ export type ContentSection = {
   body: string;
   bullets?: string[];
   note?: string;
+  image?: string;
+  imageAlt?: string;
 };
 
 export type PublicLink = {
@@ -235,6 +237,69 @@ export const courseLessons = [
 ];
 
 export const articleEntries: ArticleEntry[] = [
+  {
+    slug: "matrix-ppt-skills",
+    num: "08",
+    title: "我重新做了一种 PPT：它不是翻页，而是在一张空间里移动",
+    date: "2026.07.23",
+    series: "开源产品",
+    excerpt: "很多 PPT 的问题不是不够好看，而是每翻一页，上一页建立起来的关系就断了。Matrix PPT Skills 把演示重新组织成一条能被镜头走完的叙事路径。",
+    externalUrl: "https://github.com/hanjin714/Matrix-PPT-Skills",
+    externalLabel: "查看开源仓库",
+    image: "/assets/matrix-ppt/cover.png",
+    imageAlt: "Matrix PPT Skills：它不是翻页，而是在一张空间里移动",
+    imageWidth: 1200,
+    imageHeight: 510,
+    sections: [
+      {
+        heading: "PPT 真正的问题，不一定是不好看",
+        body: "我重新折腾 PPT 时，越来越觉得很多演示的问题不在模板、配色或字体，而在每翻一页，上一页建立起来的关系就断了。页面当然在前进，观众的脑子却要反复重新寻找位置。动画解决了东西怎么出现，却没有自动解决观众现在应该看哪里，以及前后两页是什么关系。",
+        note: "我想解决的不是批量生成更花的页面，而是让一份演示从一摞独立页面，变成一张可以被镜头走进去的叙事地图。",
+      },
+      {
+        heading: "从页面顺序，变成空间关系",
+        body: "Matrix PPT 先改掉了一页覆盖一页的底层假设。所有 16:9 面板从一开始就存在于同一张空间画布里，各自拥有位置、尺度和方向。镜头不是切换页面，而是从一个观点走向下一个观点。观众会知道自己刚刚从哪里来，现在停在哪里，下一步准备去哪里。",
+        image: "/assets/matrix-ppt/spatial-map.png",
+        imageAlt: "从传统分页切换到空间叙事的结构示意",
+      },
+      {
+        heading: "真正高级的，不是镜头飞得多远",
+        body: "空间一旦打开，很容易堆旋转、拉远和夸张的 3D 运动。但演示不是片头，镜头如果比观点更抢眼，观众只会记得刚才飞得挺酷。Matrix PPT 默认保持单向前进、短时移动和完整边框可见；背景不持续运动，离开当前页面的动画和视频也会暂停。我要的是能用于直播、路演、课程和产品介绍的稳定叙事。",
+      },
+      {
+        heading: "一支翻页笔背后，其实是一套状态机",
+        body: "键盘、鼠标滚轮、触控板、翻页笔和手机滑动，都必须进入同一套逻辑。向前时，系统先展示当前页尚未出现的信息；这一页讲完，镜头才离开。向后时，也要先收回刚刚展开的内容，再退回上一页。系统需要持续知道当前页面、页内步骤、动画状态和历史进度。",
+        bullets: [
+          "未讲到：内容仍留在结构里，但降低存在感。",
+          "正在讲：获得完整对比度，成为当前注意力中心。",
+          "已经讲过：不消失，只退回背景，保留上下文。",
+        ],
+        image: "/assets/matrix-ppt/state-machine.png",
+        imageAlt: "翻页笔输入与页面状态机示意",
+      },
+      {
+        heading: "24 套视觉方向，不是 24 张换字模板",
+        body: "这次更新加入了 Editorial Noir、Swiss Signal、Cinematic Architecture、Paper Archive、Ink Wash Tech、Cyber Lime、Industrial Blueprint 等 24 套视觉系统。每一套都会被拆成颜色、字体、图像介质、留白、边框、阴影、共享元素和运动节奏，再进入同一套空间结构。Skill 会先判断内容和听众，再选择合适的视觉语言，而不是逐页抽模板拼接。",
+        image: "/assets/matrix-ppt/style-atlas.png",
+        imageAlt: "Matrix PPT Skills 的 24 套视觉系统",
+      },
+      {
+        heading: "它接手的不是一页，而是一条生产路径",
+        body: "第一步不是选特效，而是判断听众、目标和材料里的核心矛盾。接着把内容压成 6 到 10 个完整观点，每一页只承担一个主要判断。然后才进入视觉方向、空间位置、背景图像、共享元素和页内分步。生成之后还要在浏览器里检查文字溢出、图片裁切、页面边框、回退状态、概览和低性能设备表现。",
+        image: "/assets/matrix-ppt/production-loop.png",
+        imageAlt: "Matrix PPT 从材料到浏览器验收的生产路径",
+      },
+      {
+        heading: "开源以后，怎么第一次调用它",
+        body: "Matrix PPT Skills 的标准成品是一个自包含的 HTML 文件夹，而不是原生 PowerPoint。你可以把开源仓库地址交给 Codex、Claude、WorkBuddy 或其他能够读取本地 Skill 的 Agent，让它安装并理解规则。第一次使用时，把一份真实材料交给 Agent，先让它判断听众、目标和核心矛盾，再选择视觉系统，不要从页面特效开始。",
+        note: "一个 Skill 真正成熟的标志，不是说明书写得有多长，而是别人把一团材料交给它以后，能不能得到一个自己真的愿意站上台去讲的东西。",
+      },
+    ],
+    map: ["材料判断", "叙事拆解", "视觉系统", "空间镜头", "浏览器验收"],
+    links: [
+      { label: "GitHub：Matrix PPT Skills", url: "https://github.com/hanjin714/Matrix-PPT-Skills" },
+    ],
+  },
   {
     slug: "seven-days-after-ai-growth-loop",
     num: "07",
